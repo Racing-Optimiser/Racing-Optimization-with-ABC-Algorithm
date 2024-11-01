@@ -1,0 +1,34 @@
+[
+{
+    "name" : "Overheat, fix cooling system",
+    "fixtime" : [900], 
+    "garage": "True",
+    "crucial": "True",
+    //ile razy można ponownie naprawić daną usterkę
+    "stock_number": 5,  
+    //prawdopowobienstwo wystapienia(waga)
+    "propability" : 0.60,
+    //procent vmax 
+    "speed_reduction" : 0.60,
+    //pogarszanie sie usterki per ?okrazenie?
+    "failure_deterioration" : 0.1, 
+    //nastepna usterka gdy nie naprawione
+    "next_failure" :  "engine"
+},
+{
+    "name" : "turbo",
+    "fixtime" : 1800 , 
+    "garage": "True",
+    "crucial": "True",
+    "stock_number": 5,
+    "propability" : 0.60,
+    //procent vmax 
+    "speed_reduction" : 0.60,
+    //pogarszanie sie usterki per ?okrazenie?
+    "failure_deterioration" : 0.1, 
+    //nastepna usterka gdy nie naprawione
+    "next_failure" :  "engine"
+
+}
+
+]
