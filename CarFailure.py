@@ -4,25 +4,27 @@ import random
 class CarFailure:
     name: str
     fixtime : int #sec
-    garage: bool
-    crucial: bool
-    stock_number: int
-    propability : float
-    speed_reduction: float
-    failure_deterioration : float
-    next_failure : str
+    garage: bool #
+    stock_number: int #ile razy można ponownie naprawić daną usterkę
+    propability : float #prawdopowobienstwo wystapienia(waga)
+    speed_reduction: float #procent vmax 
+    failure_deterioration : float #pogarszanie sie usterki per ?okrazenie?
+    next_failure : str #nastepna usterka gdy nie naprawione
+    fuel_penalty : float #zwiekszone zuzycie paliwa
+    chance_of_repair_failure : float #szansa na nieudaną naprawę
 
-    def __init__(self,name,fixtime,garage,crucial,stock_number,propability,speed_reduction,failure_deterioration,next_failure) -> None:
+    def __init__(self,name,fixtime,garage,stock_number,propability,speed_reduction,failure_deterioration,next_failure,fuel_penalty,chance_of_repair_failure) -> None:
 
         self.name = name
         self.fixtime = fixtime
         self.garage = garage
-        self.crucial = crucial
         self.stock_number = stock_number
         self.propability = propability
         self.speed_reduction = speed_reduction
         self.failure_deterioration = failure_deterioration
         self.next_failure = next_failure
+        self.fuel_penalty = fuel_penalty
+        self.chance_of_repair_failure = chance_of_repair_failure
         
 
 
@@ -41,23 +43,11 @@ class CarFailure:
                     propability=item["propability"],
                     speed_reduction=item["speed_reduction"],
                     failure_deterioration=item["failure_deterioration"],
-                    next_failure=item["next_failure"]
+                    next_failure=item["next_failure"],
+                    fuel_penalty=item["fuel_penalty"],
+                    chance_of_repair_failure=item['chance_of_repair_failure']
                 )
                 failures.append(failure)
             return failures
 
-def choose_random_failure(failures):
-    
-    probabilities = [failures.propability]
-    chosen_failure = random.choices(failures, weights=probabilities, k=1)[0]
-    
-    return chosen_failure
 
-
-filename = "failure_list.json"  
-failures = CarFailure.load_from_file(filename)
-
-
-random_failure = choose_random_failure(failures)
-
-print(f"Wybrana usterka: {random_failure.name}")
