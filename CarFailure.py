@@ -7,11 +7,13 @@ class CarFailure:
     garage: bool #
     stock_number: int #ile razy można ponownie naprawić daną usterkę
     propability : float #prawdopowobienstwo wystapienia(waga)
-    speed_reduction: float #procent vmax 
+    speed_reduction: float #procent vmax
+    speed_reduction_night : float #procent vmax w nocy
     failure_deterioration : float #pogarszanie sie usterki per ?okrazenie?
     next_failure : str #nastepna usterka gdy nie naprawione
-    fuel_penalty : float #zwiekszone zuzycie paliwa
+    fuel_penalty : float #zwiekszone zuzycie paliwa 1l/100km
     chance_of_repair_failure : float #szansa na nieudaną naprawę
+    
 
     def __init__(self,name,fixtime,garage,stock_number,propability,speed_reduction,failure_deterioration,next_failure,fuel_penalty,chance_of_repair_failure) -> None:
 

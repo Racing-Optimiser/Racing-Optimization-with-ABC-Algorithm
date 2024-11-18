@@ -3,7 +3,7 @@ import random
 import json
 
 
-failure_list = CarFailure.load_from_file('failure_list.json')
+
 
 def pit_stop_time(am_of_fuel,failure = None,wheels = False):
     #time to switch wheels
