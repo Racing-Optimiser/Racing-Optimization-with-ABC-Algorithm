@@ -15,7 +15,7 @@ class CarFailure:
     chance_of_repair_failure : float #szansa na nieudaną naprawę
     
 
-    def __init__(self,name,fixtime,garage,stock_number,propability,speed_reduction,failure_deterioration,next_failure,fuel_penalty,chance_of_repair_failure) -> None:
+    def __init__(self,name,fixtime,garage,stock_number,propability,speed_reduction,speed_reduction_night,failure_deterioration,next_failure,fuel_penalty,chance_of_repair_failure) -> None:
 
         self.name = name
         self.fixtime = fixtime
@@ -23,6 +23,7 @@ class CarFailure:
         self.stock_number = stock_number
         self.propability = propability
         self.speed_reduction = speed_reduction
+        self.speed_reduction_night = speed_reduction_night
         self.failure_deterioration = failure_deterioration
         self.next_failure = next_failure
         self.fuel_penalty = fuel_penalty
@@ -31,7 +32,7 @@ class CarFailure:
 
 
     @staticmethod
-    def load_from_file(self,filename):
+    def load_from_file(filename):
         with open(filename, 'r') as file:
             data = json.load(file)
             failures = []
@@ -40,10 +41,10 @@ class CarFailure:
                     name=item["name"],
                     fixtime=item["fixtime"],
                     garage=item["garage"] == "True",
-                    crucial=item["crucial"] == "True",
                     stock_number=item["stock_number"],
                     propability=item["propability"],
                     speed_reduction=item["speed_reduction"],
+                    speed_reduction_night = item["speed_reduction_night"],
                     failure_deterioration=item["failure_deterioration"],
                     next_failure=item["next_failure"],
                     fuel_penalty=item["fuel_penalty"],

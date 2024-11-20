@@ -1,6 +1,7 @@
-import CarFailure
+import car_failure
 import random
 import json
+from car_failure import CarFailure
 
 
 
@@ -14,10 +15,10 @@ def pit_stop_time(am_of_fuel,failure = None,wheels = False):
     t_drp = 20
     #time spend on refueling 1 l of fuel
     tf = 2
-    
+
     if not wheels:
         tw = 0
-    
+
     if not failure:
         t_p = tw + tf * am_of_fuel + t_drp
     
@@ -39,7 +40,7 @@ def tire_wear():
 
 def choose_random_failure(failures):
     
-    probabilities = [failures.propability]
+    probabilities = [failure.propability for failure in failures]
     chosen_failure = random.choices(failures, weights=probabilities, k=1)[0]
     
     return chosen_failure
