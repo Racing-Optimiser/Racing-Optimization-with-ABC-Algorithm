@@ -1,7 +1,7 @@
 [
     {
         "name" : "Light rain",
-        "failure_propability" : 0.01,
+        "failure_probability" : 0.01,
         "speed_reduction" : 0.05,
         "speed_reduction_night" : 0.07,
         "surface_grip": 0.85,

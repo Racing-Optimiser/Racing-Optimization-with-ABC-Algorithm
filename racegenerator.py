@@ -3,18 +3,18 @@ from alghoritmfunctions import choose_random_failure
 from race_car import RaceCar
 from race_track import RaceTrack
 from car_failure import CarFailure
-
+from weather_class import Weather
 
 def lap_generator(car,track,failure_list,race_time,drive_style,weather):
     
-    
+    lap_events = []
     if race_time in range(14400,57600):
         night = True
     else:
         night = False
     
     weather = weather_generator(weather)
-
+    lap_events.append(weather)
 
     if drive_style == 0:
         if not night:
@@ -41,13 +41,13 @@ def lap_generator(car,track,failure_list,race_time,drive_style,weather):
         random_failure = []
         failures = CarFailure.load_from_file(failure_list)
         random_failure = choose_random_failure(failures)
-        lap_events = random_failure
+        lap_events.append(random_failure)
     
     return lap_events
 
 def weather_generator(actual_weather):
-    
-    next_weather = random.choices(actual_weather.next_weather,weights=[0.5,0.5],k=1)[0]
+    options = [actual_weather.name] + actual_weather.next_weather
+    next_weather = random.choices(options,weights=[0.7,0.15,0.15],k=1)[0]
     return next_weather
 
 
@@ -65,8 +65,15 @@ def main():
         )
     track = RaceTrack()
 
+    weather_list = 'weather_conditions.json'
+    weathers = Weather.load_from_file(weather_list)
+    weather = weathers[0]
+
 
     failure_list = 'failure_list.json'
-    lap_generator(car,track,failure_list)
+    for i in range(track.lap_amount):
 
+        lap_events = lap_generator(car,track,failure_list,5,1,weather)
+        weather = lap_events[0]
+        actuall_failures = lap_events[1]
 main()
