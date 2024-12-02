@@ -4,38 +4,56 @@ import json
 from car_failure import CarFailure
 
 
+# Wczytaj dane z pliku JSON
+with open("race_simulation.json", "r") as file:
+    race_data = json.load(file)
+for lap in race_data:
+        print(lap['lap_number'])
+        lap_time = lap["lap_data"]["lap_time"]
+        tire_wear = lap["lap_data"]["tire_wear"]
+        fuel_level = lap["lap_data"]["fuel_level"]
+        failure = lap["lap_data"]["failure"]
+        weather = lap["lap_data"]["weather"]
+        
 
+def calculate_total_time(race_data, strategy):
+    total_time = 0
+    for lap in race_data:
+        lap_time = lap["lap_data"]["lap_time"]
+        tire_wear = lap["lap_data"]["tire_wear"]
+        fuel_level = lap["lap_data"]["fuel_level"]
+        failure = lap["lap_data"]["failure"]
+        weather = lap["lap_data"]["weather"]
+        
+        # Adjust lap time for tire wear and weather conditions
+        adjusted_lap_time = lap_time + (tire_wear * 10)  # Increase time for tire wear
+        if weather == "Light rain":
+            adjusted_lap_time += 15  # Time penalty for rain
+        
+        # Check if a pitstop is required (e.g. fuel or tire change)
+        if fuel_level < 5 or tire_wear < 0.5 or "overheat" in failure:
+            pitstop_time = perform_pitstop(failure, strategy)  # Time spent in pitstop
+            adjusted_lap_time += pitstop_time
+        
+        total_time += adjusted_lap_time
+    
+    return total_time
 
-def pit_stop_time(am_of_fuel,failure = None,wheels = False):
-    #time to switch wheels
-    tw = 20
-    #time to take car in and out of garage
-    t_grg = 60
-    #time lost to drive to pit-stop
-    t_drp = 20
-    #time spend on refueling 1 l of fuel
-    tf = 2
+def perform_pitstop(failure, strategy):
+    # Assume pitstop times and repairs for the sake of the example
+    repair_times = {
+        "Fuel pump issue": 60,
+        "Brakes overheat": 80,
+        "Cooling system": 70,
+        "Paint scratch": 20
+    }
+    
+    total_repair_time = sum([repair_times.get(f, 0) for f in failure.split(',')])
+    tire_change_time = 30 if strategy["tires_change"] else 0
+    fuel_time = 20 if strategy["fuel_amount"] > 10 else 0
+    
+    return total_repair_time + tire_change_time + fuel_time
 
-    if not wheels:
-        tw = 0
-
-    if not failure:
-        t_p = tw + tf * am_of_fuel + t_drp
-    
-    elif failure.garage:
-        t_p = t_grg + failure.time + tw + tf * am_of_fuel + t_drp
-    
-    else:
-        if tf * am_of_fuel > failure.time:
-            t_p = am_of_fuel + t_drp
-        else:
-            t_p = failure.time + t_drp
-    
-    return t_p
-    
-    
-def tire_wear():
-    pass
 
 
 def choose_random_failure(failures):

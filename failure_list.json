@@ -284,5 +284,19 @@
         "next_failure" :  "None",
         "fuel_penalty": 0.01,
         "chance_of_repair_failure": 0.01
+    },
+    {
+        "name" : "Paint scratch",
+        "fixtime" : 600, 
+        "garage": "False",
+        "stock_number": 10,  
+        "propability" : 0.5,
+        "speed_reduction" : 0,
+        "speed_reduction_night" : 0,
+        "failure_deterioration" : 0, 
+        "next_failure" :  "None",
+        "fuel_penalty": 0,
+        "chance_of_repair_failure": 0
     }
+    
 ]

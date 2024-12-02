@@ -10,12 +10,13 @@ def objective(food_source):
 
 def abc_algorithm_demo():
     # Parametry algorytmu
-    dim = 2  # Liczba wymiarów, u nas przeba będzie dobrać tyle ile będzie zmiennych
+    dim = 3  # Liczba wymiarów, u nas przeba będzie dobrać tyle ile będzie zmiennych
     num_bees = 20  # Liczba pszczół
     max_iter = 100  # Maksymalna liczba iteracji
     food_limit = 50  # Limit wyczerpania źródła pożywienia
     lb, ub = -10, 10  # Dolne i górne ograniczenie
 
+    
     # Inicjalizacja
     #losowe wartości x i y w danym przedziale
     food_sources = (lb + (ub - lb) * np.random.rand(num_bees, dim))
