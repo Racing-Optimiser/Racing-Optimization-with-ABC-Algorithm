@@ -7,9 +7,9 @@ from race_car import RaceCar
 from weather_class import Weather
 from tires_class import Tire
  # Funkcja celu
-failure_list = 'failure_list.json'
-weather_list = 'weather_conditions.json'
-tire_list = 'tires_characteristics.json'
+failure_list = 'data/failure_list.json'
+weather_list = 'data/weather_conditions.json'
+tire_list = 'data/tires_characteristics.json'
 
 car = RaceCar(
         make="Toyota",
@@ -21,7 +21,7 @@ car = RaceCar(
         average_fuel_consumption=2,
         lap_time=210
         )
-with open("race_simulation.json", "r") as file:
+with open("data/race_simulation.json", "r") as file:
     race_data = json.load(file)
 
 def calculate_total_time(race_data, strategy):
@@ -34,7 +34,6 @@ def calculate_total_time(race_data, strategy):
     tire_wear = lap1["lap_data"]["tire_wear"]
     fuel_level = lap1["lap_data"]["fuel_level"]
     lap_time_start = lap1["lap_data"]["lap_time"]
-
     
     
     for lap in race_data:
@@ -70,7 +69,8 @@ def calculate_total_time(race_data, strategy):
        
         total_time += lap_time + pitstop_time
     
-    print("XD")
+    #fajnie by było tu wyświetlać która to była kalkulacja
+    print("Calculation nr: ")
     return total_time
 
 def get_tire_by_name(name, tires):
@@ -323,3 +323,4 @@ def visualize_optimization(food_sources, objective, lb, ub, best_solutions):
 
 # Uruchomienie algorytmu
 abc_algorithm_demo()
+

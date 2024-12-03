@@ -110,5 +110,5 @@ class MapCreator:
 
 if __name__ == "__main__":
     screen = pygame.display.set_mode((800, 600)) 
-    mapcreator = MapCreator(screen)
+    mapcreator = MapCreator(screen, (800, 600))
     mapcreator.run()
