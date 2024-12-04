@@ -6,7 +6,7 @@ class Menu:
         self.screen = screen
         self.font = pygame.font.SysFont("Courier", 50)
         self.title_font = pygame.font.SysFont("Papyrus", 80)  # Larger font for the title
-        self.background_image = pygame.image.load("background.jpg")  
+        self.background_image = pygame.image.load("data/background.jpg")  
         self.buttons = {
             'Map Creator': pygame.Rect(150, 200, 500, 50),
             'Run Simulation': pygame.Rect(150, 300, 500, 50),

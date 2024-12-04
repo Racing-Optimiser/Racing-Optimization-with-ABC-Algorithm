@@ -3,7 +3,7 @@ import numpy as np
 
 class MapCreator:
     def __init__(self, screen, screen_size, grid=np.full((10, 10), 0)):
-        self.background_image = pygame.image.load("track_background.jpg")  
+        self.background_image = pygame.image.load("data/track_background.jpg")  
         self.screen_width, self.screen_height = screen_size
         self.screen = screen
         self.grid = grid
