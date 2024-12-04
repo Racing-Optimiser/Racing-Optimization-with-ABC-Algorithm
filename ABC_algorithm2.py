@@ -7,7 +7,7 @@ from race_car import RaceCar
 from weather_class import Weather
 from tires_class import Tire
  # Funkcja celu
-failure_list = 'data/failure_list.json'
+failure_list = './data/failure_list.json'
 weather_list = 'data/weather_conditions.json'
 tire_list = 'data/tires_characteristics.json'
 
@@ -100,16 +100,16 @@ def abc_algorithm_demo():
     max_iter = 50  # Maksymalna liczba iteracji
     food_limit = 50  # Limit wyczerpania źródła pożywienia
     bounds = [
-        (5, 20),  # Dla okrążenia początkowego
+        (1, 20),  # Interwały pitstopow
         ['soft', 'medium', 'hard', 'wet'],  # Strategia opon
-        (1, 50),  # Strategia paliwa
+        (1, 35),  # Strategia paliwa
         (0.1, 1)  # Zużycie opon
     ]
 
     # Inicjalizacja
     population = [
         [
-            random.randint(*bounds[0]),  # Okrążenie początkowe
+            random.randint(*bounds[0]),  # Interwały pitstopow
             random.choice(bounds[1]),  # Strategia opon
             random.randint(*bounds[2]),  # Strategia paliwa
             random.uniform(*bounds[3])  # Strategia zużycia opon
@@ -192,11 +192,7 @@ def abc_algorithm_demo():
     print(best_solutions)
     return best_solutions
 
-def generate_solution():
-    return {
-        'tire_type': random.choice(['Soft','Medium','Hard', 'Wet']),
-        'pit_stop_lap': random.randint(1, 50)
-    }
+
 def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = True,fuel = True):
     """
     Funkcja symulująca pitstop: wymiana opon, naprawa usterek, uzupełnienie paliwa.
@@ -205,8 +201,8 @@ def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = 
     total_pit_time = 0
     if tire_change:
     # Wymiana opon na nowe (przywracamy pełną wydajność)
-        tires_list = 'tires_characteristics.json'
-        tires_list = Tire.load_from_file(tires_list)
+        
+        tires_list = Tire.load_from_file(tire_list)
         
         new_tire = get_tire_by_name(tires,tires_list)
         tires = new_tire
@@ -233,8 +229,6 @@ def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = 
     # Można zresetować awarie po naprawach
     actuall_failures.clear()
 
-    
-    
 
     # Pitstop trwa również określony czas
     pitstop_time = 30 + total_repair_time + time_refuel + tires_change_time  # Zliczamy czas pitstopu i naprawy
@@ -281,7 +275,7 @@ def lap_time_with_actuall_conditions(actuall_failures,lap_time,tires,tires_wear,
 
     
 
-    return lap_time + lap_time * max_red + lap_time * wet_reduction + lap_time * grip_red + lap_time * tires_wear
+    return lap_time + lap_time * max_red + lap_time * wet_reduction + lap_time * grip_red + lap_time * (1 - tires_wear)
 
 
 
