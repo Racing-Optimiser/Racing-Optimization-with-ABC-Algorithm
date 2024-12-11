@@ -93,12 +93,12 @@ def get_weather_by_name(name,weather_list):
 
 
 
-def abc_algorithm_demo():
+def abc_algorithm_demo(max_iter, num_bees, food_limit):
     # Parametry algorytmu
     dim = 4  # Liczba wymiarów
-    num_bees = 10  # Liczba pszczół
-    max_iter = 50  # Maksymalna liczba iteracji
-    food_limit = 50  # Limit wyczerpania źródła pożywienia
+    # num_bees = 10  # Liczba pszczół
+    # max_iter = 50  # Maksymalna liczba iteracji
+    # food_limit = 50  # Limit wyczerpania źródła pożywienia
     bounds = [
         (1, 20),  # Interwały pitstopow
         ['soft', 'medium', 'hard', 'wet'],  # Strategia opon
@@ -316,5 +316,6 @@ def visualize_optimization(food_sources, objective, lb, ub, best_solutions):
     plt.show()
 
 # Uruchomienie algorytmu
-abc_algorithm_demo()
+if __name__ == "__main__":
+    abc_algorithm_demo(50, 10, 50)
 

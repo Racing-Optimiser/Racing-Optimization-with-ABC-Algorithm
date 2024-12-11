@@ -45,7 +45,9 @@ class Simulation:
                 # Handle submit button
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if self.submit_button.collidepoint(event.pos):
-                        print("User Input:", [field.text for field in self.fields])
+                        parameters = [field.text for field in self.fields]
+                        print("User Input:", parameters)
+                        return 'RACING', [int(parameters[0]), int(parameters[1]), int(parameters[2])]
 
             # Draw the grid
             for row in range(self.map_height):
