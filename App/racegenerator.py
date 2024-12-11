@@ -7,7 +7,7 @@ from race_track import RaceTrack
 from car_failure import CarFailure
 from weather_class import Weather
 from tires_class import Tire
-weather_list_json = 'weather_conditions.json'
+weather_list_json = 'data/weather_conditions.json'
 
 def lap_generator(car,track,failure_list,race_time,drive_style,weather,tires):
     
@@ -90,6 +90,7 @@ def save_to_json_race(file_path, lap_number, lap_data):
 
 
 def lap_time_with_actuall_conditions(actuall_failures,lap_time,tires,tires_wear,weather):
+    reductions = None
     if actuall_failures:
         reductions = [failure.speed_reduction for failure in actuall_failures]
     max_red = 0
@@ -137,7 +138,7 @@ def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = 
     total_pit_time = 0
     if tire_change:
     # Wymiana opon na nowe (przywracamy pełną wydajność)
-        tires_list = 'tires_characteristics.json'
+        tires_list = 'data/tires_characteristics.json'
         tires_list = Tire.load_from_file(tires_list)
         
         new_tire = get_tire_by_name(tires_list,tires)
@@ -192,7 +193,7 @@ def clear_json_file(file_path):
 # Example usage:
 
 def main():
-    clear_json_file('race_simulation.json')
+    clear_json_file('data/race_simulation1.json')
     car = RaceCar(
         make="Toyota",
         model="GR010 Hybrid",
@@ -204,10 +205,10 @@ def main():
         lap_time=210
         )
     track = RaceTrack()
-    tires_list_json = 'tires_characteristics.json'
+    tires_list_json = 'data/tires_characteristics.json'
     tires_list = Tire.load_from_file(tires_list_json)
     
-    weather_list = 'weather_conditions.json'
+    weather_list = 'data/weather_conditions.json'
     
     tires = get_tire_by_name(tires_list,"soft")
     
@@ -229,7 +230,7 @@ def main():
     
     tires_wear = 1
     fuel_level = car.fuel_tank_capacity
-    failure_list = 'failure_list.json'
+    failure_list = 'data/failure_list.json'
     i = 1
     race_time = 0
     while race_time < 86400:
@@ -271,7 +272,7 @@ def main():
         
         final_lap_time += pitstop_time
         lap_data["lap_time"] = final_lap_time
-        save_to_json_race('race_simulation.json',i,lap_data)
+        save_to_json_race('data/race_simulation.json',i,lap_data)
 
         i += 1
 

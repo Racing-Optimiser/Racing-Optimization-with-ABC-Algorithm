@@ -26,47 +26,42 @@ with open("data/race_simulation.json", "r") as file:
 
 def calculate_total_time(race_data, strategy):
     total_time = 0
+    #pobranie strategii
     pitstop_intervals = strategy[0]
     tires = strategy[1]
     fuel_pitstop = strategy[2]
     tire_wear_str = strategy[3]
-    lap1 = race_data[0]
+    #Pobranie danych o 1 okrążeniu
+    lap1 = race_data[0] 
     tire_wear = lap1["lap_data"]["tire_wear"]
     fuel_level = lap1["lap_data"]["fuel_level"]
     lap_time_start = lap1["lap_data"]["lap_time"]
-    
+    failures_list = []
     
     for lap in race_data:
         
-        
+        #pobieranie danych pogody i usterek w danym okrążeniu
         failure = lap["lap_data"]["failure"]
         weather = lap["lap_data"]["weather"]
-        failures_list = []
-        #pobreanie obiektu z nazwy 
-
-        failure = get_failure_by_name(failure,CarFailure.load_from_file(failure_list))
-        failures_list.append(failure)
         
-
-
+        
+        #pobreanie obiektu z nazwy 
+        failure = get_failure_by_name(failure,CarFailure.load_from_file(failure_list))
+        if failure:
+            failures_list.append(failure)
 
         lap_number = lap['lap_number']
-
+        #obliczenie czasu okrążenia
         lap_time = lap_time_with_actuall_conditions(failures_list,lap_time_start,tires,tire_wear,weather)
-        # Adjust lap time for tire wear and weather conditions
         
-        adjusted_lap_time = lap_time + (tire_wear * 10)  # Increase time for tire wear
-        
-        
-        # Check if a pitstop is required (e.g. fuel or tire change)
+        # Sprawdzenie warunków zjazdu do pitstopu
         if fuel_level < fuel_pitstop or tire_wear < tire_wear_str :
-            tires,tires_wear,actuall_failures, pitstop_time,fuel_level,pitstop_data = pitstop(car, tires,fuel_level, failures_list,repair = True,tire_change = True,fuel = True)
+            tires,tires_wear,failures_list, pitstop_time,fuel_level,pitstop_data = pitstop(car, tires,fuel_level, failures_list,repair = True,tire_change = True,fuel = True)
         elif lap_number == pitstop_intervals:
-            tires,tires_wear,actuall_failures, pitstop_time,fuel_level,pitstop_data = pitstop(car, tires,fuel_level, failures_list,repair = True,tire_change = True,fuel = True)
+            tires,tires_wear,failures_list, pitstop_time,fuel_level,pitstop_data = pitstop(car, tires,fuel_level, failures_list,repair = True,tire_change = True,fuel = True)
         else:
             pitstop_time = 0
         
-       
         total_time += lap_time + pitstop_time
     
     #fajnie by było tu wyświetlać która to była kalkulacja
@@ -198,7 +193,7 @@ def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = 
     Funkcja symulująca pitstop: wymiana opon, naprawa usterek, uzupełnienie paliwa.
     """
     total_repair_time = 0
-    total_pit_time = 0
+    tires_change_time = 0
     if tire_change:
     # Wymiana opon na nowe (przywracamy pełną wydajność)
         
@@ -213,25 +208,22 @@ def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = 
     # Uzupełnienie paliwa
     if fuel:
         refuel = car.fuel_tank_capacity - fuel_level  # Maksymalna pojemność baku
-        time_refuel = 10 + refuel * 2
+        time_refuel = 10 + refuel * 2 #czas spędzony na dolanie x litrów paliwa
         fuel_level = car.fuel_tank_capacity
     
     failure_names = []
-    if repair and actuall_failures[0]:
+    if repair and actuall_failures:
     # Naprawa usterek
        
         for failure in actuall_failures:
 
             failure_names.append(failure.name)
             total_repair_time += failure.fixtime  # Sumujemy czas naprawy
-      # Sumujemy utratę wydajności
-    
+
     # Można zresetować awarie po naprawach
-    actuall_failures.clear()
-
-
+        actuall_failures.clear()
     # Pitstop trwa również określony czas
-    pitstop_time = 30 + total_repair_time + time_refuel + tires_change_time  # Zliczamy czas pitstopu i naprawy
+    pitstop_time = 50 + total_repair_time + time_refuel + tires_change_time  # Zliczamy czas pitstopu i naprawy
     
     pitstop_data = {
         "repairs" : failure_names,
@@ -244,6 +236,7 @@ def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = 
     return tires.name,tires_wear,actuall_failures, pitstop_time,fuel_level,pitstop_data
 
 def lap_time_with_actuall_conditions(actuall_failures,lap_time,tires,tires_wear,weather):
+    #zwiększenie czasu okrążenia ze względu na usterki
     try:
 
         reductions = [failure.speed_reduction for failure in actuall_failures]
@@ -259,7 +252,7 @@ def lap_time_with_actuall_conditions(actuall_failures,lap_time,tires,tires_wear,
 
     tires_wet_cap = tires.wet_performance
     wet_reduction = 0
-    #procentowe obnizenie predkosci okrazenia w zwiazku z mokroscia jezdzni oraz przyczepnosci
+    #procentowe zwiększenie czasu okrazenia w zwiazku z mokroscia jezdzni 
     if wet_level > 0:
         wet_reduction = wet_level - tires_wet_cap
         if wet_reduction < 0:
@@ -269,11 +262,11 @@ def lap_time_with_actuall_conditions(actuall_failures,lap_time,tires,tires_wear,
     grip_tires = tires.grip
     grip_weather = weather.surface_grip
 
+    #zwiększenie czasu okrążenia ze względu na typ użytych opon przy aktualnej pogodzie
     grip_red = grip_weather - grip_tires
     if grip_red < 0:
         grip_red = 0
 
-    
 
     return lap_time + lap_time * max_red + lap_time * wet_reduction + lap_time * grip_red + lap_time * (1 - tires_wear)
 
