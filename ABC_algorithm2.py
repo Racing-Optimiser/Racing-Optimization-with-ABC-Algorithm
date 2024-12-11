@@ -36,18 +36,19 @@ def calculate_total_time(race_data, strategy):
     tire_wear = lap1["lap_data"]["tire_wear"]
     fuel_level = lap1["lap_data"]["fuel_level"]
     lap_time_start = lap1["lap_data"]["lap_time"]
-    
+    failures_list = []
     
     for lap in race_data:
         
         #pobieranie danych pogody i usterek w danym okrążeniu
         failure = lap["lap_data"]["failure"]
         weather = lap["lap_data"]["weather"]
-        failures_list = []
+        
         
         #pobreanie obiektu z nazwy 
         failure = get_failure_by_name(failure,CarFailure.load_from_file(failure_list))
-        failures_list.append(failure)
+        if failure:
+            failures_list.append(failure)
 
         lap_number = lap['lap_number']
         #obliczenie czasu okrążenia
@@ -55,9 +56,9 @@ def calculate_total_time(race_data, strategy):
         
         # Sprawdzenie warunków zjazdu do pitstopu
         if fuel_level < fuel_pitstop or tire_wear < tire_wear_str :
-            tires,tires_wear,actuall_failures, pitstop_time,fuel_level,pitstop_data = pitstop(car, tires,fuel_level, failures_list,repair = True,tire_change = True,fuel = True)
+            tires,tires_wear,failures_list, pitstop_time,fuel_level,pitstop_data = pitstop(car, tires,fuel_level, failures_list,repair = True,tire_change = True,fuel = True)
         elif lap_number == pitstop_intervals:
-            tires,tires_wear,actuall_failures, pitstop_time,fuel_level,pitstop_data = pitstop(car, tires,fuel_level, failures_list,repair = True,tire_change = True,fuel = True)
+            tires,tires_wear,failures_list, pitstop_time,fuel_level,pitstop_data = pitstop(car, tires,fuel_level, failures_list,repair = True,tire_change = True,fuel = True)
         else:
             pitstop_time = 0
         
@@ -211,7 +212,7 @@ def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = 
         fuel_level = car.fuel_tank_capacity
     
     failure_names = []
-    if repair and actuall_failures[0]:
+    if repair and actuall_failures:
     # Naprawa usterek
        
         for failure in actuall_failures:
@@ -220,9 +221,9 @@ def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = 
             total_repair_time += failure.fixtime  # Sumujemy czas naprawy
 
     # Można zresetować awarie po naprawach
-    actuall_failures.clear()
+        actuall_failures.clear()
     # Pitstop trwa również określony czas
-    pitstop_time = 30 + total_repair_time + time_refuel + tires_change_time  # Zliczamy czas pitstopu i naprawy
+    pitstop_time = 50 + total_repair_time + time_refuel + tires_change_time  # Zliczamy czas pitstopu i naprawy
     
     pitstop_data = {
         "repairs" : failure_names,
