@@ -91,9 +91,10 @@ def get_weather_by_name(name,weather_list):
 def abc_algorithm_demo(max_iter, num_bees, food_limit):
     # Parametry algorytmu
     dim = 4  # Liczba wymiarów
-    # num_bees = 10  # Liczba pszczół
-    # max_iter = 50  # Maksymalna liczba iteracji
-    # food_limit = 50  # Limit wyczerpania źródła pożywienia
+    num_bees = 10  # Liczba pszczół
+    max_iter = 10  # Maksymalna liczba iteracji
+    food_limit = 10  # Limit wyczerpania źródła pożywienia
+    best_strategies = []
     bounds = [
         (1, 20),  # Interwały pitstopow
         ['soft', 'medium', 'hard', 'wet'],  # Strategia opon
@@ -114,9 +115,12 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
 
     fitness = [calculate_total_time(race_data, strategy) for strategy in population]
     trial_counter = np.zeros(num_bees)
-
-    best_fitness = min(fitness)
-    best_solutions = [best_fitness]
+    
+    best_fitness = min(enumerate(fitness), key=lambda x: x[1])
+    best_strategies.append(population[best_fitness[0]])
+    best_solutions = [best_fitness[1]]
+    best_fitness = best_fitness[1]
+    
 
     # Główna pętla algorytmu
     for _ in range(max_iter):
@@ -177,13 +181,21 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
                 trial_counter[i] = 0
 
         # Zapis najlepszych wyników
-        current_best = min(fitness)
+        current_best = min(enumerate(fitness), key=lambda x: x[1])
+
+        idx = current_best[0] 
+
+        current_best = current_best[1]
+
         if current_best < best_fitness:
             best_fitness = current_best
+        best_strategies.append(population[idx])
         best_solutions.append(best_fitness)
 
     # Wizualizacja wyników (opcjonalnie)
     # visualize_optimization(population, calculate_total_time, lb, ub, best_solutions)
+    for i, value in enumerate(best_strategies, start=1):  
+        print(f"Strategia {i}: {value}")
     print(best_solutions)
     return best_solutions
 

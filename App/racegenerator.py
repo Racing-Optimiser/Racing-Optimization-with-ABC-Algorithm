@@ -1,7 +1,6 @@
 import random
 import json
 import os
-from alghoritmfunctions import choose_random_failure
 from race_car import RaceCar
 from race_track import RaceTrack
 from car_failure import CarFailure
@@ -88,6 +87,12 @@ def save_to_json_race(file_path, lap_number, lap_data):
     with open(file_path, 'w') as file:
         json.dump(race_data, file, indent=4)
 
+def choose_random_failure(failures):
+    
+    probabilities = [failure.propability for failure in failures]
+    chosen_failure = random.choices(failures, weights=probabilities, k=1)[0]
+    
+    return chosen_failure
 
 def lap_time_with_actuall_conditions(actuall_failures,lap_time,tires,tires_wear,weather):
     reductions = None
