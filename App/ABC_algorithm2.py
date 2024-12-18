@@ -39,7 +39,8 @@ def calculate_total_time(race_data, strategy):
     failures_list = []
     
     for lap in race_data:
-        
+        tires_degrad = get_tire_by_name(tires,Tire.load_from_file(tire_list))
+        tires_degrad = tires_degrad.degradation_rate    
         #pobieranie danych pogody i usterek w danym okrążeniu
         failure = lap["lap_data"]["failure"]
         weather = lap["lap_data"]["weather"]
@@ -56,14 +57,14 @@ def calculate_total_time(race_data, strategy):
         
         # Sprawdzenie warunków zjazdu do pitstopu
         if fuel_level < fuel_pitstop or tire_wear < tire_wear_str :
-            tires,tires_wear,failures_list, pitstop_time,fuel_level,pitstop_data = pitstop(car, tires,fuel_level, failures_list,repair = True,tire_change = True,fuel = True)
+            tires,tire_wear,failures_list, pitstop_time,fuel_level,pitstop_data = pitstop(car, tires,fuel_level, failures_list,repair = True,tire_change = True,fuel = True)
         elif lap_number == pitstop_intervals:
-            tires,tires_wear,failures_list, pitstop_time,fuel_level,pitstop_data = pitstop(car, tires,fuel_level, failures_list,repair = True,tire_change = True,fuel = True)
+            tires,tire_wear,failures_list, pitstop_time,fuel_level,pitstop_data = pitstop(car, tires,fuel_level, failures_list,repair = True,tire_change = True,fuel = True)
         else:
             pitstop_time = 0
         
         total_time += lap_time + pitstop_time
-    
+        tire_wear -= tires_degrad
     #fajnie by było tu wyświetlać która to była kalkulacja
     print("Calculation nr: ")
     return total_time
