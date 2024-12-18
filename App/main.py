@@ -3,6 +3,7 @@ from menu import Menu
 from map_creator import MapCreator
 from simulation import Simulation
 from racing import Racing
+from result_screen import Result_Screen
 import numpy as np
 
 pygame.init()
@@ -20,6 +21,7 @@ menu = Menu(screen)
 map_creator = MapCreator(screen, screen_size)
 simulation = Simulation(screen, screen_size)
 racing = Racing()
+result_screen = Result_Screen()
 running = True
 while running:
     for event in pygame.event.get():
@@ -44,15 +46,19 @@ while running:
             current_state, parameters = next_state
         elif next_state:
             current_state = next_state
+            
     elif current_state == RACING:
-        next_state = racing.run(parameters)
-        if next_state:
+        next_state= racing.run(parameters)
+        
+        if isinstance(next_state, tuple):  # Check if a tuple is returned
+            current_state, results = next_state
+        elif next_state:
             current_state = next_state
             
-    # elif current_state == RESULT_SCREEN:
-    #     next_state = result_screen.run(results)
-    #     if next_state:
-    #         current_state = next_state
+    elif current_state == RESULT_SCREEN:
+        next_state = result_screen.run(results)
+        if next_state:
+            current_state = next_state
         # else:
         #     print("nie stworzyłeś mapy!")
         #     current_state = MENU
