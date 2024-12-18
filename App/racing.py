@@ -10,6 +10,7 @@ def draw_spinner(screen, angle, center, radius):
 
 class Racing:
     def __init__(self):
+        self.background_image = pygame.image.load("data/clock.jpeg")  
         self.running = True
         self.algorithm_thread = None
         self.algorithm_done = False
@@ -36,20 +37,19 @@ class Racing:
                     return 'MENU', None
 
         screen = pygame.display.get_surface()
-        screen.fill((0, 0, 0))
+        screen.blit(self.background_image, (0, 0))  
         font = pygame.font.Font(None, 36)
         center = (screen.get_width() // 2, screen.get_height() // 2)
 
         if not self.algorithm_done:
-            text = font.render("Wyścig trwa... obliczanie", True, (255, 255, 255))
-            # screen.blit(text, (50, 250))
+            # text = font.render("Wyścig trwa... obliczanie", True, (255, 255, 255))
+            # screen.blit(text, (100, 250))
             self.angle += 0.1
             draw_spinner(screen, self.angle, center, 50)
         else:
             # text = font.render(f"Koniec obliczeń. Znalezione minimum: )", True, (255, 255, 255))
             return 'RESULT_SCREEN', self.result
 
-        screen.blit(text, (100, 250))
 
         
  
