@@ -31,19 +31,21 @@ def calculate_total_time(race_data, strategy):
     tires = strategy[1]
     fuel_pitstop = strategy[2]
     tire_wear_str = strategy[3]
+    car_power = strategy[4]
     #Pobranie danych o 1 okrążeniu
     lap1 = race_data[0] 
     tire_wear = lap1["lap_data"]["tire_wear"]
     fuel_level = lap1["lap_data"]["fuel_level"]
-    lap_time_start = lap1["lap_data"]["lap_time"]
+    lap_time_start = lap1["lap_data"]["lap_time"] 
     failures_list = []
     
+    lap_time_start = lap_time_start + lap_time_start * (1 - car_power)
     for lap in race_data:
         
         #pobieranie danych pogody i usterek w danym okrążeniu
-        failure = lap["lap_data"]["failure"]
-        weather = lap["lap_data"]["weather"]
         
+        weather = lap["lap_data"]["weather"]
+        failure = failure_generator(car_power,weather)
         
         #pobreanie obiektu z nazwy 
         failure = get_failure_by_name(failure,CarFailure.load_from_file(failure_list))
@@ -52,7 +54,7 @@ def calculate_total_time(race_data, strategy):
 
         lap_number = lap['lap_number']
         #obliczenie czasu okrążenia
-        lap_time = lap_time_with_actuall_conditions(failures_list,lap_time_start,tires,tire_wear,weather)
+        lap_time = lap_time_with_actuall_conditions(failures_list,lap_time_start,tires,tire_wear,weather,car_power)
         
         # Sprawdzenie warunków zjazdu do pitstopu
         if fuel_level < fuel_pitstop or tire_wear < tire_wear_str :
@@ -86,6 +88,51 @@ def get_weather_by_name(name,weather_list):
             return weather
     return None  
 
+def failure_generator(car_power,weather):
+    # if race_time in range(14400,57600):
+    #     night = True
+    # else:
+    #     night = False
+    
+    
+    
+
+    # if drive_style == 0:
+    #     if not night:
+    #         failure_prob = 0.2
+    #     if night:
+    #         failure_prob = 0.25
+    # if drive_style == 1:
+
+    #     if not night:
+    #         failure_prob = 0.3
+    #     if night:
+    #         failure_prob = 0.40
+
+    # if drive_style == 2:
+    #     if not night:
+    #         failure_prob = 0.4
+    #     if night:
+    #         failure_prob = 0.60
+
+    failure_prob = car_power - 0.4
+    
+    
+    failure = random.choices([True, False], weights=[failure_prob, 1 - failure_prob], k=1)[0]
+    if failure:
+        random_failure = []
+        failures = CarFailure.load_from_file(failure_list)
+        random_failure = choose_random_failure(failures)
+    else:
+        random_failure = None    
+    return random_failure
+
+def choose_random_failure(failures):
+    
+    probabilities = [failure.propability for failure in failures]
+    chosen_failure = random.choices(failures, weights=probabilities, k=1)[0]
+    
+    return chosen_failure
 
 
 def abc_algorithm_demo(max_iter, num_bees, food_limit):
@@ -99,7 +146,8 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
         (1, 20),  # Interwały pitstopow
         ['soft', 'medium', 'hard', 'wet'],  # Strategia opon
         (1, 35),  # Strategia paliwa
-        (0.1, 1)  # Zużycie opon
+        (0.1, 1),  # Zużycie opon
+        (0.5,1) #Limit mocy pojazdu
     ]
 
     # Inicjalizacja
@@ -108,7 +156,8 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
             random.randint(*bounds[0]),  # Interwały pitstopow
             random.choice(bounds[1]),  # Strategia opon
             random.randint(*bounds[2]),  # Strategia paliwa
-            random.uniform(*bounds[3])  # Strategia zużycia opon
+            random.uniform(*bounds[3]),  # Strategia zużycia opon
+            random.uniform(*bounds[4]) #Strategia mocy pojazdu
         ]
         for _ in range(num_bees)
     ]
@@ -175,7 +224,8 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
                     random.randint(*bounds[0]),
                     random.choice(bounds[1]),
                     random.randint(*bounds[2]),
-                    random.uniform(*bounds[3])
+                    random.uniform(*bounds[3]),
+                    random.uniform(*bounds[4])
                 ]
                 fitness[i] = calculate_total_time(race_data, population[i])
                 trial_counter[i] = 0
