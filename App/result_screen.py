@@ -3,7 +3,7 @@ class Result_Screen:
     def __init__(self):
         self.running = True 
 
-    def run(self, results):
+    def run(self, results = None):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
