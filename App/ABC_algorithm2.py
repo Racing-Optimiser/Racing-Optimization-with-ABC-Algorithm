@@ -39,6 +39,7 @@ def calculate_total_time(race_data, strategy):
     lap_time_start = lap1["lap_data"]["lap_time"] 
     failures_list = []
     
+    #zmiana podstawowego czasu okrążenia gdy ograniczamy moc
     lap_time_start = lap_time_start + lap_time_start * (1 - car_power)
     for lap in race_data:
         
@@ -47,10 +48,10 @@ def calculate_total_time(race_data, strategy):
         tires_degrad = tires_degrad.degradation_rate
 
         weather = lap["lap_data"]["weather"]
-        failure = failure_generator(car_power,weather)
+        failure = failure_generator(car_power,weather,tire_wear)
         
-        #pobreanie obiektu z nazwy 
-        failure = get_failure_by_name(failure,CarFailure.load_from_file(failure_list))
+        #pobreanie obiektu z nazwy
+        # failure = get_failure_by_name(failure,CarFailure.load_from_file(failure_list))
         if failure:
             failures_list.append(failure)
 
@@ -90,7 +91,7 @@ def get_weather_by_name(name,weather_list):
             return weather
     return None  
 
-def failure_generator(car_power,weather):
+def failure_generator(car_power,weather,tire_wear):
     # if race_time in range(14400,57600):
     #     night = True
     # else:
@@ -118,15 +119,28 @@ def failure_generator(car_power,weather):
     #         failure_prob = 0.60
 
     failure_prob = car_power - 0.4
-    
+    random_failure = []
     
     failure = random.choices([True, False], weights=[failure_prob, 1 - failure_prob], k=1)[0]
     if failure:
         random_failure = []
         failures = CarFailure.load_from_file(failure_list)
-        random_failure = choose_random_failure(failures)
+        random_failure.append(choose_random_failure(failures))
     else:
         random_failure = None    
+    
+    tire_fail_prob = (1 - tire_wear)**2
+    tire_failure = random.choices([True, False], weights=[tire_fail_prob, 1 - tire_fail_prob], k=1)[0]
+
+    if tire_failure:
+        if not random_failure:
+            random_failure = []
+        tire_fail = random.choices(["Tire puncture","Tire blowout"], weights=[tire_wear, 1 - tire_wear], k=1)[0]
+        tire_fail = get_failure_by_name(tire_fail,CarFailure.load_from_file(failure_list))
+        random_failure.append(tire_fail)
+
+
+    
     return random_failure
 
 def choose_random_failure(failures):
@@ -139,10 +153,10 @@ def choose_random_failure(failures):
 
 def abc_algorithm_demo(max_iter, num_bees, food_limit):
     # Parametry algorytmu
-    dim = 4  # Liczba wymiarów
-    num_bees = 10  # Liczba pszczół
-    max_iter = 10  # Maksymalna liczba iteracji
-    food_limit = 10  # Limit wyczerpania źródła pożywienia
+    dim = 5  # Liczba wymiarów
+    num_bees = 20  # Liczba pszczół
+    max_iter = 20  # Maksymalna liczba iteracji
+    food_limit = 30  # Limit wyczerpania źródła pożywienia
     best_strategies = []
     bounds = [
         (1, 20),  # Interwały pitstopow
@@ -151,7 +165,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
         (0.1, 1),  # Zużycie opon
         (0.5,1) #Limit mocy pojazdu
     ]
-
+    
     # Inicjalizacja
     population = [
         [
@@ -281,8 +295,8 @@ def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = 
        
         for failure in actuall_failures:
 
-            failure_names.append(failure.name)
-            total_repair_time += failure.fixtime  # Sumujemy czas naprawy
+            failure_names.append(failure[0].name)
+            total_repair_time += failure[0].fixtime  # Sumujemy czas naprawy
 
     # Można zresetować awarie po naprawach
         actuall_failures.clear()
@@ -299,7 +313,7 @@ def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = 
     # Zwracamy nowe opony, czas pitstopu oraz naprawy
     return tires.name,tires_wear,actuall_failures, pitstop_time,fuel_level,pitstop_data
 
-def lap_time_with_actuall_conditions(actuall_failures,lap_time,tires,tires_wear,weather):
+def lap_time_with_actuall_conditions(actuall_failures,lap_time,tires,tires_wear,weather,car_power):
     #zwiększenie czasu okrążenia ze względu na usterki
     try:
 
