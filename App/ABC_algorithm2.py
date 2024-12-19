@@ -22,7 +22,7 @@ car = RaceCar(
         horsepower=680,
         weight=1040,
         fuel_tank_capacity=35,
-        average_fuel_consumption=2,
+        average_fuel_consumption=3, #power*avg_fuel_consumption
         lap_time=210
         )
 with open("data/race_simulation.json", "r") as file:
@@ -73,6 +73,7 @@ def calculate_total_time(race_data, strategy):
         
         total_time += lap_time + pitstop_time
         tire_wear -= tires_degrad
+        fuel_level -= car.average_fuel_consumption * car_power
     #fajnie by było tu wyświetlać która to była kalkulacja
     print("Calculation nr: ")
     return total_time
@@ -96,32 +97,8 @@ def get_weather_by_name(name,weather_list):
     return None  
 
 def failure_generator(car_power,weather,tire_wear):
-    # if race_time in range(14400,57600):
-    #     night = True
-    # else:
-    #     night = False
     
-    
-    
-
-    # if drive_style == 0:
-    #     if not night:
-    #         failure_prob = 0.2
-    #     if night:
-    #         failure_prob = 0.25
-    # if drive_style == 1:
-
-    #     if not night:
-    #         failure_prob = 0.3
-    #     if night:
-    #         failure_prob = 0.40
-
-    # if drive_style == 2:
-    #     if not night:
-    #         failure_prob = 0.4
-    #     if night:
-    #         failure_prob = 0.60
-
+    # failure_prob = 1 - np.exp(-5 * car_power)
     failure_prob = car_power - 0.4
     random_failure = []
     
@@ -158,16 +135,16 @@ def choose_random_failure(failures):
 def abc_algorithm_demo(max_iter, num_bees, food_limit):
     # Parametry algorytmu
     dim = 5  # Liczba wymiarów
-    num_bees = 10  # Liczba pszczół
-    max_iter = 10  # Maksymalna liczba iteracji
-    food_limit = 10  # Limit wyczerpania źródła pożywienia
+    num_bees = 30  # Liczba pszczół
+    max_iter = 30  # Maksymalna liczba iteracji
+    food_limit = 15  # Limit wyczerpania źródła pożywienia
     best_strategies = []
     bounds = [
         (1, 20),  # Interwały pitstopow
         ['soft', 'medium', 'hard', 'wet'],  # Strategia opon
         (1, 35),  # Strategia paliwa
         (0.1, 1),  # Zużycie opon
-        (0.5,1) #Limit mocy pojazdu
+        [round(x * 0.05 + 0.5, 2) for x in range(11)] #Limit mocy pojazdu
     ]
     
     # Inicjalizacja
@@ -177,7 +154,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
             random.choice(bounds[1]),  # Strategia opon
             random.randint(*bounds[2]),  # Strategia paliwa
             random.uniform(*bounds[3]),  # Strategia zużycia opon
-            random.uniform(*bounds[4]) #Strategia mocy pojazdu
+            random.choice(bounds[4]) #Strategia mocy pojazdu
         ]
         for _ in range(num_bees)
     ]
@@ -205,6 +182,11 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
                     candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))
                     candidate.append(int(round(candidate_value)))
+                elif j == 4:
+                    candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
+                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))  # Klipowanie
+                    candidate_value = round(candidate_value * 2) / 2  
+                    candidate.append(candidate_value)
                 else:
                     candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))  # Klipowanie
@@ -232,6 +214,11 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
                     candidate_value = population[selected][j] + phi * (population[selected][j] - population[partner][j])
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))
                     candidate.append(int(round(candidate_value)))
+                elif j == 4:
+                    candidate_value = population[selected][j] + phi * (population[selected][j] - population[partner][j])
+                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))  # Klipowanie
+                    candidate_value = round(candidate_value * 2) / 2  # Zaokrąglenie do 0.5
+                    candidate.append(candidate_value)
                 else:
                     candidate_value = population[selected][j] + phi * (population[selected][j] - population[partner][j])
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))
@@ -253,7 +240,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
                     random.choice(bounds[1]),
                     random.randint(*bounds[2]),
                     random.uniform(*bounds[3]),
-                    random.uniform(*bounds[4])
+                    random.choice(bounds[4])
                 ]
                 fitness[i] = calculate_total_time(race_data, population[i])
                 trial_counter[i] = 0
@@ -284,6 +271,7 @@ def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = 
     """
     total_repair_time = 0
     tires_change_time = 0
+    t_to_garage = 0
     if tire_change:
     # Wymiana opon na nowe (przywracamy pełną wydajność)
         
@@ -306,14 +294,16 @@ def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = 
     # Naprawa usterek
        
         for failure in actuall_failures:
-
+            
             failure_names.append(failure[0].name)
             total_repair_time += failure[0].fixtime  # Sumujemy czas naprawy
 
     # Można zresetować awarie po naprawach
         actuall_failures.clear()
+        t_to_garage = 60
+    
     # Pitstop trwa również określony czas
-    pitstop_time = 50 + total_repair_time + time_refuel + tires_change_time  # Zliczamy czas pitstopu i naprawy
+    pitstop_time = 90 + total_repair_time + time_refuel + tires_change_time + t_to_garage # Zliczamy czas pitstopu i naprawy
     
     pitstop_data = {
         "repairs" : failure_names,
