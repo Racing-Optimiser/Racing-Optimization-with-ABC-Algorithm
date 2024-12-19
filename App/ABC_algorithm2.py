@@ -2,10 +2,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 import json
+import psutil
+import os
+import time
 from car_failure import CarFailure
 from race_car import RaceCar
 from weather_class import Weather
 from tires_class import Tire
+
  # Funkcja celu
 failure_list = './data/failure_list.json'
 weather_list = 'data/weather_conditions.json'
@@ -154,9 +158,9 @@ def choose_random_failure(failures):
 def abc_algorithm_demo(max_iter, num_bees, food_limit):
     # Parametry algorytmu
     dim = 5  # Liczba wymiarów
-    num_bees = 20  # Liczba pszczół
-    max_iter = 20  # Maksymalna liczba iteracji
-    food_limit = 30  # Limit wyczerpania źródła pożywienia
+    num_bees = 10  # Liczba pszczół
+    max_iter = 10  # Maksymalna liczba iteracji
+    food_limit = 10  # Limit wyczerpania źródła pożywienia
     best_strategies = []
     bounds = [
         (1, 20),  # Interwały pitstopow
@@ -197,6 +201,10 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
             for j in range(dim):
                 if j == 1:  # Strategia opon (string)
                     candidate.append(random.choice(bounds[1]))
+                elif j == 0:
+                    candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
+                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))
+                    candidate.append(int(round(candidate_value)))
                 else:
                     candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))  # Klipowanie
@@ -220,6 +228,10 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
             for j in range(dim):
                 if j == 1:  # Strategia opon (string)
                     candidate.append(random.choice(bounds[1]))
+                elif j == 0:
+                    candidate_value = population[selected][j] + phi * (population[selected][j] - population[partner][j])
+                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))
+                    candidate.append(int(round(candidate_value)))
                 else:
                     candidate_value = population[selected][j] + phi * (population[selected][j] - population[partner][j])
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))
@@ -386,7 +398,17 @@ def visualize_optimization(food_sources, objective, lb, ub, best_solutions):
     plt.tight_layout()
     plt.show()
 
+def monitor_memory():
+    process = psutil.Process(os.getpid())
+    mem_info = process.memory_info()
+    return mem_info.rss / (1024 ** 2)  # Zwraca pamięć w MB
 # Uruchomienie algorytmu
 if __name__ == "__main__":
+    start_memory = monitor_memory()
+    start_time = time.perf_counter()
     abc_algorithm_demo(50, 10, 50)
+    stop_time = time.perf_counter()
+    end_memory = monitor_memory()
 
+    print(f"Memory used: {end_memory - start_memory:.2f} MB")
+    print(f"Execution time: {stop_time - start_time}")
