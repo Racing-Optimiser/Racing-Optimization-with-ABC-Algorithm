@@ -9,8 +9,24 @@ from car_failure import CarFailure
 from race_car import RaceCar
 from weather_class import Weather
 from tires_class import Tire
+from brakes_failure_class import BrakesFailure
+from engine_failure_class import EngineFailure
+from suspension_failure_class import SuspensionFailure
+from tires_failure_class import TiresFailure
 
- # Funkcja celu
+
+failures_engine = EngineFailure.load_from_file()
+thresholds_engine = [[failure.name, failure.engine_threshold ] for failure in failures_engine]
+
+failures_brakes = BrakesFailure.load_from_file()
+thresholds_brakes = [[failure.name, failure.brake_threshold ] for failure in failures_brakes]
+
+failures_suspension = SuspensionFailure.load_from_file()
+thresholds_suspension = [[failure.name, failure.suspension_threshold ] for failure in failures_suspension]
+
+failures_tires = TiresFailure.load_from_file()
+thresholds_tires = [[failure.name, failure.tires_threshold ] for failure in failures_tires]
+
 failure_list = './data/failure_list.json'
 weather_list = 'data/weather_conditions.json'
 tire_list = 'data/tires_characteristics.json'
@@ -27,7 +43,8 @@ car = RaceCar(
         )
 with open("data/race_simulation.json", "r") as file:
     race_data = json.load(file)
-
+ 
+ # Funkcja celu
 def calculate_total_time(race_data, strategy):
     total_time = 0
     #pobranie strategii
@@ -42,6 +59,19 @@ def calculate_total_time(race_data, strategy):
     fuel_level = lap1["lap_data"]["fuel_level"]
     lap_time_start = lap1["lap_data"]["lap_time"] 
     failures_list = []
+
+    parts_wear = {
+        "Engine" : 1,
+        "Suspension" : 1,
+        "Brakes" : 1,
+    }
+
+    parts_degrad = {
+    "Engine": 0.05,
+    "Suspension": 0.03,
+    "Brakes": 0.08,
+    }   
+
     
     #zmiana podstawowego czasu okrążenia gdy ograniczamy moc
     lap_time_start = lap_time_start + lap_time_start * (1 - car_power)
@@ -52,7 +82,7 @@ def calculate_total_time(race_data, strategy):
         tires_degrad = tires_degrad.degradation_rate
 
         weather = lap["lap_data"]["weather"]
-        failure = failure_generator(car_power,weather,tire_wear)
+        failure = failure_generator(car_power,weather,tire_wear,parts_wear)
         
         #pobreanie obiektu z nazwy
         # failure = get_failure_by_name(failure,CarFailure.load_from_file(failure_list))
@@ -74,29 +104,34 @@ def calculate_total_time(race_data, strategy):
         total_time += lap_time + pitstop_time
         tire_wear -= tires_degrad
         fuel_level -= car.average_fuel_consumption * car_power
+        
+        parts_wear = {part: parts_wear[part] - parts_degrad.get(part, 0) for part in parts_wear}
     #fajnie by było tu wyświetlać która to była kalkulacja
     print("Calculation nr: ")
     return total_time
 
-def get_tire_by_name(name, tires):
-    for tire in tires:
-        if tire.name.lower() == name.lower():  # Ignoruje wielkość liter
-            return tire
-    return None  # Jeśli nie znaleziono opony
 
-def get_failure_by_name(name,failure_list):
-    for failure in failure_list:
-        if  failure.name.lower() == name.lower():  # Ignoruje wielkość liter
-            return failure
-    return None
+def failure_generator(car_power,weather,tire_wear,parts_wear):
+    #DOKOŃCZYĆ
+    possible_failures_breaks = []
+    possible_failures_engine = []
+    possible_failures_suspension = []
+    engine_wear = parts_wear['Engine']
+    suspension_wear = parts_wear['Suspension']
+    brakes_wear = parts_wear['Brakes']
 
-def get_weather_by_name(name,weather_list):
-    for weather in weather_list:
-        if  weather.name.lower() == name.lower():  # Ignoruje wielkość liter
-            return weather
-    return None  
-
-def failure_generator(car_power,weather,tire_wear):
+    for threshold in thresholds_brakes:
+        if threshold[1] > brakes_wear:
+            possible_failures_breaks.append(threshold[0])
+    
+    for threshold in thresholds_engine:
+        if threshold[1] > engine_wear:
+            possible_failures_engine.append(threshold[0])
+    
+    for threshold in thresholds_suspension:
+        if threshold[1] > suspension_wear:
+            possible_failures_suspension.append(threshold[0])
+    
     
     # failure_prob = 1 - np.exp(-5 * car_power)
     failure_prob = car_power - 0.4
@@ -135,7 +170,7 @@ def choose_random_failure(failures):
 def abc_algorithm_demo(max_iter, num_bees, food_limit):
     # Parametry algorytmu
     dim = 5  # Liczba wymiarów
-    num_bees = 30  # Liczba pszczół
+    num_bees = 40  # Liczba pszczół
     max_iter = 30  # Maksymalna liczba iteracji
     food_limit = 15  # Limit wyczerpania źródła pożywienia
     best_strategies = []
@@ -350,6 +385,48 @@ def lap_time_with_actuall_conditions(actuall_failures,lap_time,tires,tires_wear,
 
     return lap_time + lap_time * max_red + lap_time * wet_reduction + lap_time * grip_red + lap_time * (1 - tires_wear)
 
+def get_tire_by_name(name, tires):
+    for tire in tires:
+        if tire.name.lower() == name.lower():  # Ignoruje wielkość liter
+            return tire
+    return None  # Jeśli nie znaleziono opony
+
+def get_failure_by_name(name,failure_list):
+    for failure in failure_list:
+        if  failure.name.lower() == name.lower():  # Ignoruje wielkość liter
+            return failure
+    return None
+
+def get_failure_engine_by_name(name,failure_list=failures_engine):
+    for failure in failure_list:
+        if  failure.name.lower() == name.lower():  # Ignoruje wielkość liter
+            return failure
+    return None
+
+def get_failure_suspension_by_name(name,failure_list=failures_suspension):
+    for failure in failure_list:
+        if  failure.name.lower() == name.lower():  # Ignoruje wielkość liter
+            return failure
+    return None
+
+def get_failure_tires_by_name(name,failure_list=failures_tires):
+    for failure in failure_list:
+        if  failure.name.lower() == name.lower():  # Ignoruje wielkość liter
+            return failure
+    return None
+
+def get_failure_brakes_by_name(name,failure_list=failures_brakes):
+    for failure in failure_list:
+        if  failure.name.lower() == name.lower():  # Ignoruje wielkość liter
+            return failure
+    return None
+
+
+def get_weather_by_name(name,weather_list):
+    for weather in weather_list:
+        if  weather.name.lower() == name.lower():  # Ignoruje wielkość liter
+            return weather
+    return None  
 
 
 #selekcja probabilistyczna (ruletka)
