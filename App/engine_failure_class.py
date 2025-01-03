@@ -15,7 +15,7 @@ class EngineFailure:
     chance_of_repair_failure: float  # szansa na nieudaną naprawę
     engine_threshold: float  # próg zużycia silnika, przy którym występuje awaria
     
-    def __init__(self, name, fixtime, garage, stock_number, propability, speed_reduction, speed_reduction_night, failure_deterioration, next_failure, fuel_penalty, chance_of_repair_failure, engine_threshold, suspension_threshold, tires_threshold, cooling_threshold, brake_threshold) -> None:
+    def __init__(self, name, fixtime, garage, stock_number, propability, speed_reduction, speed_reduction_night, failure_deterioration, next_failure, fuel_penalty, chance_of_repair_failure, engine_threshold) -> None:
         self.name = name
         self.fixtime = fixtime
         self.garage = garage
@@ -28,11 +28,7 @@ class EngineFailure:
         self.fuel_penalty = fuel_penalty
         self.chance_of_repair_failure = chance_of_repair_failure
         self.engine_threshold = engine_threshold
-        self.suspension_threshold = suspension_threshold
-        self.tires_threshold = tires_threshold
-        self.cooling_threshold = cooling_threshold
-        self.brake_threshold = brake_threshold
-
+        
     @staticmethod
     def load_from_file(filename = "./data/engine_failures.json"):
         with open(filename, 'r') as file:

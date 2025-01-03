@@ -15,7 +15,7 @@ class TiresFailure:
     chance_of_repair_failure: float  # szansa na nieudaną naprawę
     tires_threshold: float  # próg zużycia opon, przy którym występuje awaria
  
-    def __init__(self, name, fixtime, garage, stock_number, propability, speed_reduction, speed_reduction_night, failure_deterioration, next_failure, fuel_penalty, chance_of_repair_failure, engine_threshold, suspension_threshold, tires_threshold, cooling_threshold, brake_threshold) -> None:
+    def __init__(self, name, fixtime, garage, stock_number, propability, speed_reduction, speed_reduction_night, failure_deterioration, next_failure, fuel_penalty, chance_of_repair_failure, tires_threshold,) -> None:
         self.name = name
         self.fixtime = fixtime
         self.garage = garage
