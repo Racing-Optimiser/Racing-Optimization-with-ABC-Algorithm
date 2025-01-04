@@ -20,7 +20,7 @@ grid=np.full((10, 10), 0)
 menu = Menu(screen)
 map_creator = MapCreator(screen, screen_size)
 simulation = Simulation(screen, screen_size)
-racing = Racing()
+racing = Racing(screen, screen_size)
 result_screen = Result_Screen()
 running = True
 while running:

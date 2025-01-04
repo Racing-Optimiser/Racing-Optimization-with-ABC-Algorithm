@@ -66,7 +66,7 @@ def calculate_total_time(race_data, strategy):
         total_time += lap_time + pitstop_time
         tire_wear -= tires_degrad
     #fajnie by było tu wyświetlać która to była kalkulacja
-    print("Calculation nr: ")
+    # print("Calculation nr: ")
     return total_time
 
 def get_tire_by_name(name, tires):
