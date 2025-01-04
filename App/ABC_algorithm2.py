@@ -83,7 +83,8 @@ def calculate_total_time(race_data, strategy):
 
     lap_time_start = lap_time_start + lap_time_start * (1 - car_power)
     for lap in race_data:
-        
+        tires_degrad = get_tire_by_name(tires,Tire.load_from_file(tire_list))
+        tires_degrad = tires_degrad.degradation_rate    
         #pobieranie danych pogody i usterek w danym okrążeniu
         
 
@@ -105,6 +106,7 @@ def calculate_total_time(race_data, strategy):
         fuel = False
         pit_stop = False
         # Sprawdzenie warunków zjazdu do pitstopu
+
         if fuel_level < fuel_pitstop or tire_wear < tire_wear_str:
             tire_change = True
             fuel = True
@@ -150,9 +152,11 @@ def calculate_total_time(race_data, strategy):
         
         total_time += lap_time + pitstop_time
         tire_wear -= tires_degrad
+
         fuel_level -= car.average_fuel_consumption * car_power
         
         parts_wear = {part: parts_wear[part] - parts_degrad.get(part, 0) for part in parts_wear}
+
     #fajnie by było tu wyświetlać która to była kalkulacja
     print("Calculation nr: ")
     return total_time
