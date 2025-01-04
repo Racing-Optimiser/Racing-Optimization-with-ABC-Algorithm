@@ -39,6 +39,6 @@
         "next_failure": "Engine",
         "fuel_penalty": 0.4,
         "chance_of_repair_failure": 0.20,
-        "engine_threshold": 0.7
+        "engine_threshold": 0.65
     }
 ]

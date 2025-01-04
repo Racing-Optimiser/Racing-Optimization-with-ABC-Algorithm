@@ -69,9 +69,9 @@ def calculate_total_time(race_data, strategy):
     }
 
     parts_degrad = {
-        "Engine": 0.04,
-        "Suspension": 0.02,
-        "Brakes": 0.07,
+        "Engine": 0.02,
+        "Suspension": 0.01,
+        "Brakes": 0.04,
     }   
 
     #zmiana zużycia części w zależności od mocy auta
@@ -79,6 +79,8 @@ def calculate_total_time(race_data, strategy):
     tires_degrad = get_tire_by_name(tires,Tire.load_from_file(tire_list))
     tires_degrad = tires_degrad.degradation_rate
     #zmiana podstawowego czasu okrążenia gdy ograniczamy moc
+
+
     lap_time_start = lap_time_start + lap_time_start * (1 - car_power)
     for lap in race_data:
         
@@ -95,7 +97,7 @@ def calculate_total_time(race_data, strategy):
 
         lap_number = lap['lap_number']
         #obliczenie czasu okrążenia
-        lap_time = lap_time_with_actuall_conditions(failures_list,lap_time_start,tires,tire_wear,weather,car_power)
+        lap_time = lap_time_with_actuall_conditions(failures_list,lap_time_start,tires,tire_wear,weather,car_power,parts_wear)
         fix_engine = False
         fix_brakes = False
         fix_suspension = False
@@ -238,9 +240,9 @@ def choose_random_failure(failures,part_wear):
 def abc_algorithm_demo(max_iter, num_bees, food_limit):
     # Parametry algorytmu
     dim = 7  # Liczba wymiarów
-    num_bees = 15  # Liczba pszczół
-    max_iter = 15  # Maksymalna liczba iteracji
-    food_limit = 15  # Limit wyczerpania źródła pożywienia
+    num_bees = 50  # Liczba pszczół
+    max_iter = 50  # Maksymalna liczba iteracji
+    food_limit = 25  # Limit wyczerpania źródła pożywienia
     best_strategies = []
     bounds = [
         [round(x, 2) for x in [i * 0.01 for i in range(10, 101)]], # Strategia hamulce
@@ -248,7 +250,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
         [round(x, 2) for x in [i * 0.01 for i in range(10, 101)]], #Strategia zawieszenie
         ['soft', 'medium', 'hard', 'wet'],  # Strategia opon
         (1, 35),  # Strategia paliwa
-        (0.1, 1),  # Zużycie opon
+        [round(x, 2) for x in [i * 0.01 for i in range(10, 101)]],  # Zużycie opon
         [round(x * 0.05 + 0.5, 2) for x in range(11)] #Limit mocy pojazdu
     ]
     
@@ -260,7 +262,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
             random.choice(bounds[2]),  #Strategia zawieszenie
             random.choice(bounds[3]),  # Strategia opon
             random.randint(*bounds[4]),  # Strategia paliwa
-            random.uniform(*bounds[5]),  # Strategia zużycia opon
+            random.choice(bounds[5]),  # Strategia zużycia opon
             random.choice(bounds[6]) #Strategia mocy pojazdu
         ]
         for _ in range(num_bees)
@@ -294,7 +296,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))  # Klipowanie
                     candidate_value = round(candidate_value * 2) / 2  
                     candidate.append(candidate_value)
-                elif j in range(0,3):
+                elif j in range(0,3) or j == 4:
                     candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))  # Klipowanie
                     candidate_value = round(candidate_value * 2) / 2  
@@ -326,7 +328,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
                 #     candidate_value = population[selected][j] + phi * (population[selected][j] - population[partner][j])
                 #     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))
                 #     candidate.append(int(round(candidate_value)))
-                elif j in range(0,3):
+                elif j in range(0,3) or j == 4:
                     candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))  # Klipowanie
                     candidate_value = round(candidate_value * 2) / 2  
@@ -358,7 +360,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
                     random.choice(bounds[2]),  #Strategia zawieszenie
                     random.choice(bounds[3]),  # Strategia opon
                     random.randint(*bounds[4]),  # Strategia paliwa
-                    random.uniform(*bounds[5]),  # Strategia zużycia opon
+                    random.choice(bounds[5]),  # Strategia zużycia opon
                     random.choice(bounds[6]) #Strategia mocy pojazdu
                 ]
                 fitness[i] = calculate_total_time(race_data, population[i])
@@ -414,16 +416,16 @@ def pitstop(car, tires,tires_wear,fuel_level, actuall_failures,fix_engine,fix_su
 
     if fix_engine:
     
-        time_eng = 180
+        time_eng = 300
         parts_wear["Engine"] = 1
     
     if fix_brakes:
         
-        time_brak = 240
+        time_brak = 340
         parts_wear["Brakes"] = 1
     if fix_suspension:
         
-        time_sus = 360
+        time_sus = 460
         parts_wear["Suspension"] = 1
     failure_names = []
     if actuall_failures:
@@ -455,7 +457,7 @@ def pitstop(car, tires,tires_wear,fuel_level, actuall_failures,fix_engine,fix_su
     except:
         return tires,tires_wear,actuall_failures, pitstop_time,fuel_level,pitstop_data,parts_wear
 
-def lap_time_with_actuall_conditions(actuall_failures,lap_time,tires,tires_wear,weather,car_power):
+def lap_time_with_actuall_conditions(actuall_failures,lap_time,tires,tires_wear,weather,car_power,parts_wear):
     #zwiększenie czasu okrążenia ze względu na usterki
     try:
 
@@ -487,8 +489,10 @@ def lap_time_with_actuall_conditions(actuall_failures,lap_time,tires,tires_wear,
     if grip_red < 0:
         grip_red = 0
 
+    parts_sum_wear = 1 - sum(parts_wear.values())
 
-    return lap_time + lap_time * max_red + lap_time * wet_reduction + lap_time * grip_red + lap_time * (1 - tires_wear)
+
+    return lap_time + lap_time * max_red + lap_time * wet_reduction + lap_time * grip_red + lap_time * (1 - tires_wear) + lap_time * (parts_sum_wear / 3)
 
 def get_tire_by_name(name, tires):
     for tire in tires:
