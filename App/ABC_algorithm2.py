@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('TkAgg')
 import random
 import json
 import psutil
@@ -244,10 +246,15 @@ def choose_random_failure(failures,part_wear):
 def abc_algorithm_demo(max_iter, num_bees, food_limit):
     # Parametry algorytmu
     dim = 7  # Liczba wymiarów
-    num_bees = 50  # Liczba pszczół
-    max_iter = 50  # Maksymalna liczba iteracji
-    food_limit = 25  # Limit wyczerpania źródła pożywienia
+    num_bees = 15  # Liczba pszczół
+    max_iter = 10  # Maksymalna liczba iteracji
+    food_limit = 10  # Limit wyczerpania źródła pożywienia
     best_strategies = []
+    iter_show = []
+    global_iter = []
+
+    iter_nb = 0
+
     bounds = [
         [round(x, 2) for x in [i * 0.01 for i in range(10, 101)]], # Strategia hamulce
         [round(x, 2) for x in [i * 0.01 for i in range(10, 101)]], #Strategia silnik
@@ -273,6 +280,8 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
     ]
 
     fitness = [calculate_total_time(race_data, strategy) for strategy in population]
+    print(fitness)
+    # iter_show.append(fitness)
     trial_counter = np.zeros(num_bees)
     
     best_fitness = min(enumerate(fitness), key=lambda x: x[1])
@@ -280,9 +289,15 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
     best_solutions = [best_fitness[1]]
     best_fitness = best_fitness[1]
     
+    global_iter.append(fitness.copy())
 
+    vis_iter(fitness,iter_nb)
+
+    
+    
     # Główna pętla algorytmu
     for _ in range(max_iter):
+        iter_nb += 1
         # Faza pszczół robotnic
         for i in range(num_bees):
             partner = random.randint(0, num_bees - 1)
@@ -298,19 +313,20 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
                 elif j == 6:
                     candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))  # Klipowanie
-                    candidate_value = round(candidate_value * 2) / 2  
+                    candidate_value = round(candidate_value, 2)  
                     candidate.append(candidate_value)
                 elif j in range(0,3) or j == 4:
                     candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
-                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))  # Klipowanie
-                    candidate_value = round(candidate_value * 2) / 2  
+                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][-1]))  # Klipowanie
+                    candidate_value = round(candidate_value ,2) 
                     candidate.append(candidate_value)
                 else:
                     candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
-                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))  # Klipowanie
+                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][-1]))  # Klipowanie
+                    candidate_value = round(candidate_value ,2)
                     candidate.append(candidate_value)
             candidate_fitness = calculate_total_time(race_data, candidate)
-
+            iter_show.append(candidate_fitness)
             if candidate_fitness < fitness[i]:
                 population[i] = candidate
                 fitness[i] = candidate_fitness
@@ -334,19 +350,20 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
                 #     candidate.append(int(round(candidate_value)))
                 elif j in range(0,3) or j == 4:
                     candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
-                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))  # Klipowanie
-                    candidate_value = round(candidate_value * 2) / 2  
+                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][-1]))  # Klipowanie
+                    candidate_value = round(candidate_value,2)  
                     candidate.append(candidate_value)
                 elif j == 6:
                     candidate_value = population[selected][j] + phi * (population[selected][j] - population[partner][j])
-                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))  # Klipowanie
-                    candidate_value = round(candidate_value * 2) / 2  # Zaokrąglenie do 0.5
+                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][-1]))  # Klipowanie
+                    candidate_value = round(candidate_value,2)  # Zaokrąglenie do 0.5
                     candidate.append(candidate_value)
                 else:
                     candidate_value = population[selected][j] + phi * (population[selected][j] - population[partner][j])
-                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))
+                    candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][-1]))
                     candidate.append(candidate_value)
             candidate_fitness = calculate_total_time(race_data, candidate)
+            iter_show.append(candidate_fitness)
 
             if candidate_fitness < fitness[selected]:
                 population[selected] = candidate
@@ -368,6 +385,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
                     random.choice(bounds[6]) #Strategia mocy pojazdu
                 ]
                 fitness[i] = calculate_total_time(race_data, population[i])
+                iter_show.append(fitness[i])
                 trial_counter[i] = 0
 
         # Zapis najlepszych wyników
@@ -382,8 +400,14 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
         best_strategies.append(population[idx])
         best_solutions.append(best_fitness)
 
+        vis_iter(iter_show,iter_nb)
+        global_iter.append(iter_show.copy())
+        iter_show = []
+        
+
     # Wizualizacja wyników (opcjonalnie)
     # visualize_optimization(population, calculate_total_time, lb, ub, best_solutions)
+    vis_global(global_iter)
     for i, value in enumerate(best_strategies, start=1):  
         print(f"Strategia {i}: {value}")
     print(best_solutions)
@@ -577,6 +601,36 @@ def visualize_optimization(food_sources, objective, lb, ub, best_solutions):
 
     plt.tight_layout()
     plt.show()
+def vis_global(data):
+    flat_data = [item for sublist in data for item in sublist]
+    segment_ends = [len(sublist) for sublist in data]
+    cumulative_ends = [sum(segment_ends[:i+1]) for i in range(len(segment_ends))]   
+    x = list(range(1, len(flat_data) + 1))
+    plt.plot(x,flat_data)
+    plt.xlim(0, len(flat_data) + 1)
+    for end in cumulative_ends[:-1]:  
+        plt.axvline(x=end, color='red', linestyle='--', label="Boundary")
+    plt.ylim(min(flat_data) - 1, max(flat_data) + 1)
+    plt.title(f"Full")
+    plt.show()
+
+def vis_iter(data,i):
+    # if i == 0:
+    #     x = list(range(1, len(data) + 1))
+    #     plt.scatter(x,data)
+    #     plt.xlim(0, len(data) + 1)
+    #     plt.ylim(min(data) - 1, max(data) + 1)
+    #     plt.title('Rozwiązanie początkowe')
+    #     plt.show()
+    # else:
+    #     # data = data[0] + data[1:]
+    #     x = list(range(1, len(data) + 1))
+    #     plt.scatter(x,data)
+    #     plt.xlim(0, len(data) + 1)
+    #     plt.ylim(min(data) - 1, max(data) + 1)
+    #     plt.title(f"Iteracja numer {i}")
+    #     plt.show()
+    a = None
 
 def monitor_memory():
     process = psutil.Process(os.getpid())
