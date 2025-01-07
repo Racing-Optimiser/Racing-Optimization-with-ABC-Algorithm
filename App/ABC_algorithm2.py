@@ -198,7 +198,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
     for i, value in enumerate(best_strategies, start=1):  
         print(f"Strategia {i}: {value}")
     print(best_solutions)
-    return best_solutions
+    return best_solutions, best_strategies
 
 
 def pitstop(car, tires,fuel_level, actuall_failures,repair = True,tire_change = True,fuel = True):

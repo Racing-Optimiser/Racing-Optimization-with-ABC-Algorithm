@@ -22,9 +22,9 @@ class Racing:
 
 
     def run_algorithm(self, parameters):
-        best_solutions = abc_algorithm_demo(parameters[0], parameters[1], parameters[2])
+        best_solutions, best_strategies = abc_algorithm_demo(parameters[0], parameters[1], parameters[2])
         self.algorithm_done = True
-        self.result = best_solutions
+        self.result = best_solutions, best_strategies
 
     def run(self, parameters):
         if self.algorithm_thread is None:
