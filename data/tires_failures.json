@@ -1,7 +1,7 @@
 [
     {
         "name": "Tire puncture",
-        "fixtime": 300,
+        "fixtime": 60,
         "garage": "False",
         "stock_number": 12,
         "propability": 0.50,
@@ -15,7 +15,7 @@
     },
     {
         "name": "Tire blowout",
-        "fixtime": 600,
+        "fixtime": 300,
         "garage": "False",
         "stock_number": 6,
         "propability": 0.20,

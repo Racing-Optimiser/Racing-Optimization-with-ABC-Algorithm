@@ -77,19 +77,16 @@ def calculate_total_time(race_data, strategy):
     }   
 
     #zmiana zużycia części w zależności od mocy auta
-    parts_degrad = {part: parts_degrad[part] + (parts_degrad[part] * car_power) for part in parts_degrad}
+    parts_degrad = {part: parts_degrad[part] + (parts_degrad[part] * car_power * 1.1) for part in parts_degrad}
     tires_degrad = get_tire_by_name(tires,Tire.load_from_file(tire_list))
-    tires_degrad = tires_degrad.degradation_rate
+    tires_degrad = tires_degrad.degradation_rate + tires_degrad.degradation_rate * car_power * 1.2
+    
+
     #zmiana podstawowego czasu okrążenia gdy ograniczamy moc
-
-
-    lap_time_start = lap_time_start + lap_time_start * (1 - car_power)
+    lap_time_start = lap_time_start + lap_time_start * (1 - car_power) * 0.7
     for lap in race_data:
-        tires_degrad = get_tire_by_name(tires,Tire.load_from_file(tire_list))
-        tires_degrad = tires_degrad.degradation_rate    
-        #pobieranie danych pogody i usterek w danym okrążeniu
         
-
+        #pobieranie danych pogody i usterek w danym okrążeniu
         weather = lap["lap_data"]["weather"]
         failure = failure_generator(car_power,weather,tire_wear,parts_wear)
         
@@ -109,11 +106,14 @@ def calculate_total_time(race_data, strategy):
         pit_stop = False
         # Sprawdzenie warunków zjazdu do pitstopu
 
-        if fuel_level < fuel_pitstop or tire_wear < tire_wear_str:
-            tire_change = True
+        if fuel_level < fuel_pitstop:
             fuel = True
             pit_stop = True
         
+        if tire_wear < tire_wear_str:
+            tire_change = True
+            pit_stop = True
+
         if parts_wear['Engine'] < engine_wear_strat:
             fix_engine = True
             pit_stop = True
@@ -165,7 +165,7 @@ def calculate_total_time(race_data, strategy):
 
 
 def failure_generator(car_power,weather,tire_wear,parts_wear):
-    
+    tire_failure = False
     possible_failures_breaks = []
     possible_failures_engine = []
     possible_failures_suspension = []
@@ -220,8 +220,9 @@ def failure_generator(car_power,weather,tire_wear,parts_wear):
     # else:
     #     random_failure = None    
     
-    tire_fail_prob = (1 - tire_wear)**2
-    tire_failure = random.choices([True, False], weights=[tire_fail_prob, 1 - tire_fail_prob], k=1)[0]
+    if tire_wear < 0.65:
+        tire_fail_prob = (1 - tire_wear)**2
+        tire_failure = random.choices([True, False], weights=[tire_fail_prob, 1 - tire_fail_prob], k=1)[0]
 
     if tire_failure:
         if not random_failure:
@@ -246,9 +247,9 @@ def choose_random_failure(failures,part_wear):
 def abc_algorithm_demo(max_iter, num_bees, food_limit):
     # Parametry algorytmu
     dim = 7  # Liczba wymiarów
-    num_bees = 15  # Liczba pszczół
-    max_iter = 10  # Maksymalna liczba iteracji
-    food_limit = 10  # Limit wyczerpania źródła pożywienia
+    num_bees = 25  # Liczba pszczół
+    max_iter = 30  # Maksymalna liczba iteracji
+    food_limit = 15  # Limit wyczerpania źródła pożywienia
     best_strategies = []
     iter_show = []
     global_iter = []
@@ -469,7 +470,7 @@ def pitstop(car, tires,tires_wear,fuel_level, actuall_failures,fix_engine,fix_su
         t_to_garage = 60
     
     # Pitstop trwa również określony czas
-    pitstop_time = 90 + total_repair_time + time_refuel + tires_change_time + t_to_garage + time_sus + time_brak + time_eng # Zliczamy czas pitstopu i naprawy
+    pitstop_time = 120 + total_repair_time + time_refuel + tires_change_time + t_to_garage + time_sus + time_brak + time_eng # Zliczamy czas pitstopu i naprawy
     
     # pitstop_data = {
     #     "repairs" : failure_names,
@@ -520,7 +521,7 @@ def lap_time_with_actuall_conditions(actuall_failures,lap_time,tires,tires_wear,
     parts_sum_wear = 1 - sum(parts_wear.values())
 
 
-    return lap_time + lap_time * max_red + lap_time * wet_reduction + lap_time * grip_red + lap_time * (1 - tires_wear) + lap_time * (parts_sum_wear / 3)
+    return lap_time + lap_time * max_red + lap_time * wet_reduction + lap_time * grip_red + lap_time * 0.5 * (1 - tires_wear) + lap_time * (parts_sum_wear / 3)
 
 def get_tire_by_name(name, tires):
     for tire in tires:
