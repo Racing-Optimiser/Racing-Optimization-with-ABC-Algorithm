@@ -277,7 +277,7 @@ def main():
         
         final_lap_time += pitstop_time
         lap_data["lap_time"] = final_lap_time
-        save_to_json_race('data/race_simulation.json',i,lap_data)
+        save_to_json_race('data/race_simulation1.json',i,lap_data)
 
         i += 1
 

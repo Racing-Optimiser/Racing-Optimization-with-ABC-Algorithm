@@ -43,8 +43,9 @@ car = RaceCar(
         average_fuel_consumption=3, #power*avg_fuel_consumption
         lap_time=210
         )
-with open("data/race_simulation.json", "r") as file:
-    race_data = json.load(file)
+
+# with open("data/race_simulation.json", "r") as file:
+#     race_data = json.load(file)
  
  # Funkcja celu
 def calculate_total_time(race_data, strategy):
@@ -53,10 +54,12 @@ def calculate_total_time(race_data, strategy):
     brakes_wear_strat = strategy[0]
     engine_wear_strat = strategy[1]
     suspension_wear_strat = strategy[2]
-    tires = strategy[3]
+    tires_strategy = strategy[3]
     fuel_pitstop = strategy[4]
     tire_wear_str = strategy[5]
     car_power = strategy[6]
+    tires_order = 0
+    tires = tires_strategy[tires_order]
     #Pobranie danych o 1 okrążeniu
     lap1 = race_data[0] 
     tire_wear = lap1["lap_data"]["tire_wear"]
@@ -113,6 +116,7 @@ def calculate_total_time(race_data, strategy):
         if tire_wear < tire_wear_str:
             tire_change = True
             pit_stop = True
+            tires_order += 1
 
         if parts_wear['Engine'] < engine_wear_strat:
             fix_engine = True
@@ -127,8 +131,9 @@ def calculate_total_time(race_data, strategy):
             pit_stop = True
 
         if pit_stop:
-            tires,tire_wear,failures_list, pitstop_time,fuel_level,pitstop_data, parts_wear = pitstop(car, tires,tire_wear,fuel_level, failures_list,fix_engine,fix_suspension, fix_brakes,tire_change,fuel ,parts_wear)
-        
+            tires,tire_wear,failures_list, pitstop_time,fuel_level,pitstop_data, parts_wear = pitstop(car, tires,tire_wear,fuel_level, failures_list,fix_engine,fix_suspension, fix_brakes,tire_change,fuel ,parts_wear,tires_order,tires_strategy)
+            tires_degrad = get_tire_by_name(tires,Tire.load_from_file(tire_list))
+            tires_degrad = tires_degrad.degradation_rate + tires_degrad.degradation_rate * car_power * 1.2
 
         else:
             pitstop_time = 0
@@ -244,12 +249,16 @@ def choose_random_failure(failures,part_wear):
     return chosen_failure
 
 
-def abc_algorithm_demo(max_iter, num_bees, food_limit):
+def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
+    race_list = ['data/race_simulation.json','data/race_simulation1.json','data/race_simulation2.json']
+    with open(race_list[race_idx], "r") as file:
+        race_data = json.load(file)
+     
     # Parametry algorytmu
     dim = 7  # Liczba wymiarów
-    num_bees = 25  # Liczba pszczół
-    max_iter = 30  # Maksymalna liczba iteracji
-    food_limit = 15  # Limit wyczerpania źródła pożywienia
+    num_bees = 15  # Liczba pszczół
+    max_iter = 15  # Maksymalna liczba iteracji
+    food_limit = 10  # Limit wyczerpania źródła pożywienia
     best_strategies = []
     iter_show = []
     global_iter = []
@@ -272,7 +281,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
             random.choice(bounds[0]), # Strategia hamulce
             random.choice(bounds[1]), #Strategia silnik
             random.choice(bounds[2]),  #Strategia zawieszenie
-            random.choice(bounds[3]),  # Strategia opon
+            [random.choice(bounds[3]) for _ in range(5)],  # Strategia opon
             random.randint(*bounds[4]),  # Strategia paliwa
             random.choice(bounds[5]),  # Strategia zużycia opon
             random.choice(bounds[6]) #Strategia mocy pojazdu
@@ -306,7 +315,14 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
             candidate = []
             for j in range(dim):
                 if j == 3:  # Strategia opon (string)
-                    candidate.append(random.choice(bounds[3]))
+                    # candidate.append([random.choice(bounds[3]) for _ in range(5)])
+                    # Skopiuj obecną listę opon
+                    new_tires_strategy = population[i][j].copy()
+                    # Losuj indeks opony do zmiany
+                    tire_index = random.randint(0, len(new_tires_strategy) - 1)
+                    # Zmień jedną oponę na losową nową
+                    new_tires_strategy[tire_index] = random.choice(bounds[3])
+                    candidate.append(new_tires_strategy)
                 # elif j == 0:
                 #     candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
                 #     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))
@@ -344,7 +360,14 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
             candidate = []
             for j in range(dim):
                 if j == 3:  # Strategia opon (string)
-                    candidate.append(random.choice(bounds[3]))
+                    # candidate.append([random.choice(bounds[3]) for _ in range(5)])
+                    # Skopiuj obecną listę opon
+                    new_tires_strategy = population[i][j].copy()
+                    # Losuj indeks opony do zmiany
+                    tire_index = random.randint(0, len(new_tires_strategy) - 1)
+                    # Zmień jedną oponę na losową nową
+                    new_tires_strategy[tire_index] = random.choice(bounds[3])
+                    candidate.append(new_tires_strategy)
                 # elif j == 0:
                 #     candidate_value = population[selected][j] + phi * (population[selected][j] - population[partner][j])
                 #     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))
@@ -375,12 +398,13 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
 
         # Faza pszczół zwiadowców
         for i in range(num_bees):
+            # print(trial_counter)
             if trial_counter[i] > food_limit:
                 population[i] = [
                     random.choice(bounds[0]), # Strategia hamulce
                     random.choice(bounds[1]), #Strategia silnik
                     random.choice(bounds[2]),  #Strategia zawieszenie
-                    random.choice(bounds[3]),  # Strategia opon
+                    [random.choice(bounds[3]) for _ in range(5)],  # Strategia opon
                     random.randint(*bounds[4]),  # Strategia paliwa
                     random.choice(bounds[5]),  # Strategia zużycia opon
                     random.choice(bounds[6]) #Strategia mocy pojazdu
@@ -415,7 +439,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit):
     return best_solutions, best_strategies
 
 
-def pitstop(car, tires,tires_wear,fuel_level, actuall_failures,fix_engine,fix_suspension, fix_brakes,tire_change,fuel ,parts_wear):
+def pitstop(car, tires,tires_wear,fuel_level, actuall_failures,fix_engine,fix_suspension, fix_brakes,tire_change,fuel ,parts_wear,tires_order,tires_strategy):
     """
     Funkcja symulująca pitstop: wymiana opon, naprawa usterek, uzupełnienie paliwa.
     """
@@ -431,7 +455,9 @@ def pitstop(car, tires,tires_wear,fuel_level, actuall_failures,fix_engine,fix_su
         
         tires_list = Tire.load_from_file(tire_list)
         
-        new_tire = get_tire_by_name(tires,tires_list)
+        new_tire = tires_strategy[tires_order % len(tires_strategy)]
+
+        new_tire = get_tire_by_name(new_tire,tires_list)
         tires = new_tire
 
         tires_wear = 1
@@ -641,7 +667,7 @@ def monitor_memory():
 if __name__ == "__main__":
     start_memory = monitor_memory()
     start_time = time.perf_counter()
-    abc_algorithm_demo(50, 10, 50)
+    abc_algorithm_demo(50, 10, 50, 0)
     stop_time = time.perf_counter()
     end_memory = monitor_memory()
 
