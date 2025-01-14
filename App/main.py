@@ -42,18 +42,18 @@ while running:
     elif current_state == SIMULATION:
         next_state = simulation.run(grid)
         
-        if isinstance(next_state, tuple):  # Check if a tuple is returned
+        if isinstance(next_state, tuple):  
             racing.algorithm_done = False
 
-            current_state, parameters = next_state
+            current_state, parameters, race_idx = next_state
 
         elif next_state:
             current_state = next_state
             
     elif current_state == RACING:
-        next_state= racing.run(parameters)
+        next_state= racing.run(parameters, race_idx)
         
-        if isinstance(next_state, tuple):  # Check if a tuple is returned
+        if isinstance(next_state, tuple): 
             current_state, results = next_state
         elif next_state:
             current_state = next_state

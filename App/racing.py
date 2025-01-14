@@ -3,6 +3,7 @@ from ABC_algorithm2 import abc_algorithm_demo
 import threading
 import math
 
+
 def draw_spinner(screen, angle, center, radius):
     end_x = center[0] + radius * math.cos(angle)
     end_y = center[1] + radius * math.sin(angle)
@@ -21,15 +22,15 @@ class Racing:
         self.result = None
 
 
-    def run_algorithm(self, parameters):
-        best_solutions, best_strategies = abc_algorithm_demo(parameters[0], parameters[1], parameters[2])
+    def run_algorithm(self, parameters, race_idx):
+        best_solutions, best_strategies = abc_algorithm_demo(parameters[0], parameters[1], parameters[2], race_idx)
         self.algorithm_done = True
         self.result = best_solutions, best_strategies
 
-    def run(self, parameters):
+    def run(self, parameters, race_idx):
         
         if self.algorithm_thread is None:
-            self.algorithm_thread = threading.Thread(target=self.run_algorithm, args=(parameters,))
+            self.algorithm_thread = threading.Thread(target=self.run_algorithm, args=(parameters, race_idx))
             self.algorithm_thread.start()
 
         for event in pygame.event.get():
