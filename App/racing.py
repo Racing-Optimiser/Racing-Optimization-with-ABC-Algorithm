@@ -27,6 +27,7 @@ class Racing:
         self.result = best_solutions, best_strategies
 
     def run(self, parameters):
+        
         if self.algorithm_thread is None:
             self.algorithm_thread = threading.Thread(target=self.run_algorithm, args=(parameters,))
             self.algorithm_thread.start()
@@ -49,6 +50,8 @@ class Racing:
             self.angle += 0.1
             draw_spinner(screen, self.angle, center, 50)
         else:
+            self.algorithm_thread = None
+
             return 'RESULT_SCREEN', self.result
 
         

@@ -46,8 +46,10 @@ class Simulation:
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if self.submit_button.collidepoint(event.pos):
                         parameters = [field.text for field in self.fields]
-                        print("User Input:", parameters)
-                        return 'RACING', [int(parameters[0]), int(parameters[1]), int(parameters[2])]
+                        if not '' in parameters:
+                            print("User Input:", parameters)
+                            return 'RACING', [int(parameters[0]), int(parameters[1]), int(parameters[2])]
+                
 
             # Draw the grid
             for row in range(self.map_height):
@@ -70,7 +72,7 @@ class Simulation:
             for field in self.fields:
                 field.draw(self.screen)
 
-            pygame.draw.rect(self.screen, '#32da93', self.submit_button, border_radius=12)
+            pygame.draw.rect(self.screen, '#DF0000', self.submit_button, border_radius=12)
             label = self.font.render("Run Simulation", True, (0, 0, 0))
             self.screen.blit(label, (self.submit_button.x + 10, self.submit_button.y + 10))
 
@@ -101,6 +103,8 @@ class Input_Field:
 
     def draw(self, screen):
         # Draw the label
+        label_background = pygame.Rect(self.rect.x - 5, self.rect.y - 35, self.label_surface.get_width() + 10, self.label_surface.get_height() + 10)
+        pygame.draw.rect(screen, 'black', label_background, border_radius=5)
         screen.blit(self.label_surface, (self.rect.x, self.rect.y - 30))
         
         # Draw the input field

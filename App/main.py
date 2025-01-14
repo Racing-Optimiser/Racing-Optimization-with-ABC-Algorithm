@@ -3,7 +3,7 @@ from menu import Menu
 from map_creator import MapCreator
 from simulation import Simulation
 from racing import Racing
-from result_screen import Result_Screen
+from result_screen2 import Result_Screen
 import numpy as np
 
 pygame.init()
@@ -43,7 +43,10 @@ while running:
         next_state = simulation.run(grid)
         
         if isinstance(next_state, tuple):  # Check if a tuple is returned
+            racing.algorithm_done = False
+
             current_state, parameters = next_state
+
         elif next_state:
             current_state = next_state
             
