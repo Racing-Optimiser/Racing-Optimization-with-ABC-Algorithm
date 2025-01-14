@@ -41,7 +41,7 @@ car = RaceCar(
         weight=1040,
         fuel_tank_capacity=35,
         average_fuel_consumption=3, #power*avg_fuel_consumption
-        lap_time=210
+        lap_time=350
         )
 
 # with open("data/race_simulation.json", "r") as file:
@@ -64,7 +64,7 @@ def calculate_total_time(race_data, strategy):
     lap1 = race_data[0] 
     tire_wear = lap1["lap_data"]["tire_wear"]
     fuel_level = lap1["lap_data"]["fuel_level"]
-    lap_time_start = lap1["lap_data"]["lap_time"] 
+    lap_time_start = lap1["lap_data"]["lap_time"]
     failures_list = []
 
     parts_wear = {
@@ -86,7 +86,7 @@ def calculate_total_time(race_data, strategy):
     
 
     #zmiana podstawowego czasu okrążenia gdy ograniczamy moc
-    lap_time_start = lap_time_start + lap_time_start * (1 - car_power) * 0.7
+    lap_time_start = lap_time_start + lap_time_start * (1 - car_power) * 1.1
     for lap in race_data:
         
         #pobieranie danych pogody i usterek w danym okrążeniu
@@ -133,7 +133,7 @@ def calculate_total_time(race_data, strategy):
         if pit_stop:
             tires,tire_wear,failures_list, pitstop_time,fuel_level,pitstop_data, parts_wear = pitstop(car, tires,tire_wear,fuel_level, failures_list,fix_engine,fix_suspension, fix_brakes,tire_change,fuel ,parts_wear,tires_order,tires_strategy)
             tires_degrad = get_tire_by_name(tires,Tire.load_from_file(tire_list))
-            tires_degrad = tires_degrad.degradation_rate + tires_degrad.degradation_rate * car_power * 1.2
+            tires_degrad = tires_degrad.degradation_rate + tires_degrad.degradation_rate * car_power * 0.8
 
         else:
             pitstop_time = 0
@@ -315,18 +315,14 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
             candidate = []
             for j in range(dim):
                 if j == 3:  # Strategia opon (string)
-                    # candidate.append([random.choice(bounds[3]) for _ in range(5)])
-                    # Skopiuj obecną listę opon
-                    new_tires_strategy = population[i][j].copy()
-                    # Losuj indeks opony do zmiany
-                    tire_index = random.randint(0, len(new_tires_strategy) - 1)
-                    # Zmień jedną oponę na losową nową
-                    new_tires_strategy[tire_index] = random.choice(bounds[3])
-                    candidate.append(new_tires_strategy)
-                # elif j == 0:
-                #     candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
-                #     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))
-                #     candidate.append(int(round(candidate_value)))
+                    #Zmiana całej listy
+                    candidate.append([random.choice(bounds[3]) for _ in range(5)])
+                    
+                    #Zmiana jednego elementu strategi opon
+                    # new_tires_strategy = population[i][j].copy()
+                    # tire_index = random.randint(0, len(new_tires_strategy) - 1)
+                    # new_tires_strategy[tire_index] = random.choice(bounds[3])
+                    # candidate.append(new_tires_strategy)
                 elif j == 6:
                     candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))  # Klipowanie
@@ -360,18 +356,14 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
             candidate = []
             for j in range(dim):
                 if j == 3:  # Strategia opon (string)
-                    # candidate.append([random.choice(bounds[3]) for _ in range(5)])
-                    # Skopiuj obecną listę opon
-                    new_tires_strategy = population[i][j].copy()
-                    # Losuj indeks opony do zmiany
-                    tire_index = random.randint(0, len(new_tires_strategy) - 1)
-                    # Zmień jedną oponę na losową nową
-                    new_tires_strategy[tire_index] = random.choice(bounds[3])
-                    candidate.append(new_tires_strategy)
-                # elif j == 0:
-                #     candidate_value = population[selected][j] + phi * (population[selected][j] - population[partner][j])
-                #     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][1]))
-                #     candidate.append(int(round(candidate_value)))
+                    #Zmiana całej listy
+                    candidate.append([random.choice(bounds[3]) for _ in range(5)])
+                    
+                    #Zmiana jednego elementu strategi opon
+                    # new_tires_strategy = population[i][j].copy()
+                    # tire_index = random.randint(0, len(new_tires_strategy) - 1)
+                    # new_tires_strategy[tire_index] = random.choice(bounds[3])
+                    # candidate.append(new_tires_strategy)
                 elif j in range(0,3) or j == 4:
                     candidate_value = population[i][j] + phi * (population[i][j] - population[partner][j])
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][-1]))  # Klipowanie
@@ -423,7 +415,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
         if current_best < best_fitness:
             best_fitness = current_best
         best_strategies.append(population[idx])
-        best_solutions.append(best_fitness)
+        best_solutions.append(current_best)
 
         vis_iter(iter_show,iter_nb)
         global_iter.append(iter_show.copy())
@@ -461,7 +453,7 @@ def pitstop(car, tires,tires_wear,fuel_level, actuall_failures,fix_engine,fix_su
         tires = new_tire
 
         tires_wear = 1
-        tires_change_time = 20
+        tires_change_time = 30
     
     # Uzupełnienie paliwa
     if fuel:
@@ -598,7 +590,7 @@ def roulette_wheel_selection(prob):
     cumulative = np.cumsum(prob)
     r = np.random.rand()
     return np.searchsorted(cumulative, r)
-
+#NIE UZYWANE
 def visualize_optimization(food_sources, objective, lb, ub, best_solutions):
     # Rysowanie powierzchni funkcji
     x = np.linspace(lb, ub, 100)
@@ -628,6 +620,7 @@ def visualize_optimization(food_sources, objective, lb, ub, best_solutions):
 
     plt.tight_layout()
     plt.show()
+
 def vis_global(data):
     flat_data = [item for sublist in data for item in sublist]
     segment_ends = [len(sublist) for sublist in data]
@@ -638,6 +631,9 @@ def vis_global(data):
     for end in cumulative_ends[:-1]:  
         plt.axvline(x=end, color='red', linestyle='--', label="Boundary")
     plt.ylim(min(flat_data) - 1, max(flat_data) + 1)
+    y_min = min(flat_data) - 1
+    y_max = max(flat_data) + 1
+    plt.yticks(range(int(y_min), int(y_max) + 10000, 10000))
     plt.title(f"Full")
     plt.show()
 
@@ -667,7 +663,7 @@ def monitor_memory():
 if __name__ == "__main__":
     start_memory = monitor_memory()
     start_time = time.perf_counter()
-    abc_algorithm_demo(50, 10, 50, 0)
+    abc_algorithm_demo(50, 10, 50, 1)
     stop_time = time.perf_counter()
     end_memory = monitor_memory()
 

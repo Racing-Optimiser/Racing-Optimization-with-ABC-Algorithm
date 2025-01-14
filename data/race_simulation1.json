@@ -2,10 +2,10 @@
     {
         "lap_number": 1,
         "lap_data": {
-            "lap_time": 441.0,
-            "fuel_level": 32.96,
+            "lap_time": 250,
+            "fuel_level": 33,
             "tire_wear": 0.95,
-            "failure": "Tire puncture",
+            "failure": "No failure",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -14,8 +14,8 @@
     {
         "lap_number": 2,
         "lap_data": {
-            "lap_time": 430.5,
-            "fuel_level": 30.92,
+            "lap_time": 487.5,
+            "fuel_level": 31,
             "tire_wear": 0.8999999999999999,
             "failure": "No failure",
             "weather": "Sunny",
@@ -26,8 +26,8 @@
     {
         "lap_number": 3,
         "lap_data": {
-            "lap_time": 420.0,
-            "fuel_level": 28.880000000000003,
+            "lap_time": 475.0,
+            "fuel_level": 29,
             "tire_wear": 0.8499999999999999,
             "failure": "No failure",
             "weather": "Sunny",
@@ -38,45 +38,9 @@
     {
         "lap_number": 4,
         "lap_data": {
-            "lap_time": 556.5,
-            "fuel_level": 26.740000000000002,
+            "lap_time": 462.5,
+            "fuel_level": 27,
             "tire_wear": 0.7999999999999998,
-            "failure": "Tire blowout",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 5,
-        "lap_data": {
-            "lap_time": 546.0,
-            "fuel_level": 24.200000000000003,
-            "tire_wear": 0.7499999999999998,
-            "failure": "Suspension damage",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 6,
-        "lap_data": {
-            "lap_time": 535.5,
-            "fuel_level": 21.660000000000004,
-            "tire_wear": 0.6999999999999997,
-            "failure": "No failure",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 7,
-        "lap_data": {
-            "lap_time": 525.0,
-            "fuel_level": 19.120000000000005,
-            "tire_wear": 0.6499999999999997,
             "failure": "No failure",
             "weather": "Cloudy",
             "tires": "soft",
@@ -84,10 +48,46 @@
         }
     },
     {
+        "lap_number": 5,
+        "lap_data": {
+            "lap_time": 575.0,
+            "fuel_level": 24.2,
+            "tire_wear": 0.7499999999999998,
+            "failure": "Fuel pump issue",
+            "weather": "Cloudy",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 6,
+        "lap_data": {
+            "lap_time": 587.5,
+            "fuel_level": 21.0,
+            "tire_wear": 0.6999999999999997,
+            "failure": "Suspension damage",
+            "weather": "Cloudy",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 7,
+        "lap_data": {
+            "lap_time": 575.0,
+            "fuel_level": 17.8,
+            "tire_wear": 0.6499999999999997,
+            "failure": "No failure",
+            "weather": "Sunny",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
         "lap_number": 8,
         "lap_data": {
-            "lap_time": 514.5,
-            "fuel_level": 16.580000000000005,
+            "lap_time": 562.4999999999999,
+            "fuel_level": 14.600000000000001,
             "tire_wear": 0.5999999999999996,
             "failure": "No failure",
             "weather": "Sunny",
@@ -98,8 +98,8 @@
     {
         "lap_number": 9,
         "lap_data": {
-            "lap_time": 503.99999999999994,
-            "fuel_level": 14.040000000000006,
+            "lap_time": 549.9999999999999,
+            "fuel_level": 11.400000000000002,
             "tire_wear": 0.5499999999999996,
             "failure": "No failure",
             "weather": "Sunny",
@@ -110,32 +110,31 @@
     {
         "lap_number": 10,
         "lap_data": {
-            "lap_time": 3900.5,
+            "lap_time": 4051.1,
             "fuel_level": 35,
             "tire_wear": 1,
             "failure": "No failure",
-            "weather": "Cloudy",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": {
                 "repairs": [
-                    "Tire puncture",
-                    "Tire blowout",
+                    "Fuel pump issue",
                     "Suspension damage"
                 ],
-                "fuel_amount": 23.499999999999993,
+                "fuel_amount": 26.799999999999997,
                 "tires_change": true,
-                "time in pitstop": 3407.0
+                "time in pitstop": 3513.6
             }
         }
     },
     {
         "lap_number": 11,
         "lap_data": {
-            "lap_time": 504.0,
-            "fuel_level": 32.9,
+            "lap_time": 550.0,
+            "fuel_level": 32.8,
             "tire_wear": 0.95,
-            "failure": "Brakes overheat",
-            "weather": "Cloudy",
+            "failure": "Cooling system",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -143,11 +142,11 @@
     {
         "lap_number": 12,
         "lap_data": {
-            "lap_time": 577.5,
-            "fuel_level": 30.7,
+            "lap_time": 687.5,
+            "fuel_level": 30.499999999999996,
             "tire_wear": 0.8999999999999999,
             "failure": "Tire blowout",
-            "weather": "Cloudy",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -155,11 +154,11 @@
     {
         "lap_number": 13,
         "lap_data": {
-            "lap_time": 567.0,
-            "fuel_level": 28.5,
+            "lap_time": 675.0,
+            "fuel_level": 28.199999999999996,
             "tire_wear": 0.8499999999999999,
             "failure": "No failure",
-            "weather": "Cloudy",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -167,11 +166,11 @@
     {
         "lap_number": 14,
         "lap_data": {
-            "lap_time": 598.5,
-            "fuel_level": 26.3,
+            "lap_time": 662.5,
+            "fuel_level": 25.799999999999997,
             "tire_wear": 0.7999999999999998,
-            "failure": "No failure",
-            "weather": "Light rain",
+            "failure": "Brakes system",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -179,11 +178,11 @@
     {
         "lap_number": 15,
         "lap_data": {
-            "lap_time": 588.0,
-            "fuel_level": 23.900000000000002,
+            "lap_time": 650.0,
+            "fuel_level": 23.4,
             "tire_wear": 0.7499999999999998,
-            "failure": "Cooling system",
-            "weather": "Light rain",
+            "failure": "No failure",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -191,11 +190,11 @@
     {
         "lap_number": 16,
         "lap_data": {
-            "lap_time": 577.5,
-            "fuel_level": 21.500000000000004,
+            "lap_time": 637.5,
+            "fuel_level": 20.9,
             "tire_wear": 0.6999999999999997,
-            "failure": "No failure",
-            "weather": "Light rain",
+            "failure": "Brakes overheat",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -203,8 +202,8 @@
     {
         "lap_number": 17,
         "lap_data": {
-            "lap_time": 525.0,
-            "fuel_level": 19.100000000000005,
+            "lap_time": 625.0,
+            "fuel_level": 18.4,
             "tire_wear": 0.6499999999999997,
             "failure": "No failure",
             "weather": "Sunny",
@@ -215,10 +214,10 @@
     {
         "lap_number": 18,
         "lap_data": {
-            "lap_time": 514.5,
-            "fuel_level": 16.660000000000004,
+            "lap_time": 612.4999999999999,
+            "fuel_level": 15.899999999999999,
             "tire_wear": 0.5999999999999996,
-            "failure": "Tire puncture",
+            "failure": "No failure",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -227,10 +226,10 @@
     {
         "lap_number": 19,
         "lap_data": {
-            "lap_time": 503.99999999999994,
-            "fuel_level": 14.120000000000005,
+            "lap_time": 599.9999999999999,
+            "fuel_level": 13.399999999999999,
             "tire_wear": 0.5499999999999996,
-            "failure": "Brakes overheat",
+            "failure": "No failure",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -239,7 +238,7 @@
     {
         "lap_number": 20,
         "lap_data": {
-            "lap_time": 3600.34,
+            "lap_time": 3995.7,
             "fuel_level": 35,
             "tire_wear": 1,
             "failure": "No failure",
@@ -247,22 +246,21 @@
             "tires": "soft",
             "pitstop": {
                 "repairs": [
-                    "Brakes overheat",
-                    "Tire blowout",
                     "Cooling system",
-                    "Tire puncture",
+                    "Tire blowout",
+                    "Brakes system",
                     "Brakes overheat"
                 ],
-                "fuel_amount": 23.419999999999995,
+                "fuel_amount": 24.1,
                 "tires_change": true,
-                "time in pitstop": 3106.84
+                "time in pitstop": 3408.2
             }
         }
     },
     {
         "lap_number": 21,
         "lap_data": {
-            "lap_time": 420.0,
+            "lap_time": 500.0,
             "fuel_level": 33,
             "tire_wear": 0.95,
             "failure": "No failure",
@@ -274,11 +272,11 @@
     {
         "lap_number": 22,
         "lap_data": {
-            "lap_time": 409.5,
+            "lap_time": 487.5,
             "fuel_level": 31,
             "tire_wear": 0.8999999999999999,
             "failure": "No failure",
-            "weather": "Sunny",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -286,7 +284,7 @@
     {
         "lap_number": 23,
         "lap_data": {
-            "lap_time": 399.0,
+            "lap_time": 475.0,
             "fuel_level": 29,
             "tire_wear": 0.8499999999999999,
             "failure": "No failure",
@@ -298,11 +296,11 @@
     {
         "lap_number": 24,
         "lap_data": {
-            "lap_time": 388.5,
+            "lap_time": 462.5,
             "fuel_level": 27,
             "tire_wear": 0.7999999999999998,
             "failure": "No failure",
-            "weather": "Sunny",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -310,11 +308,11 @@
     {
         "lap_number": 25,
         "lap_data": {
-            "lap_time": 378.0,
+            "lap_time": 449.99999999999994,
             "fuel_level": 25,
             "tire_wear": 0.7499999999999998,
             "failure": "No failure",
-            "weather": "Sunny",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -322,10 +320,10 @@
     {
         "lap_number": 26,
         "lap_data": {
-            "lap_time": 367.49999999999994,
-            "fuel_level": 23,
+            "lap_time": 537.5,
+            "fuel_level": 22.9,
             "tire_wear": 0.6999999999999997,
-            "failure": "No failure",
+            "failure": "Brakes overheat",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -334,8 +332,8 @@
     {
         "lap_number": 27,
         "lap_data": {
-            "lap_time": 356.99999999999994,
-            "fuel_level": 21,
+            "lap_time": 525.0,
+            "fuel_level": 20.799999999999997,
             "tire_wear": 0.6499999999999997,
             "failure": "No failure",
             "weather": "Sunny",
@@ -346,8 +344,8 @@
     {
         "lap_number": 28,
         "lap_data": {
-            "lap_time": 346.49999999999994,
-            "fuel_level": 19,
+            "lap_time": 512.4999999999999,
+            "fuel_level": 18.699999999999996,
             "tire_wear": 0.5999999999999996,
             "failure": "No failure",
             "weather": "Sunny",
@@ -358,8 +356,8 @@
     {
         "lap_number": 29,
         "lap_data": {
-            "lap_time": 335.99999999999994,
-            "fuel_level": 17,
+            "lap_time": 499.9999999999999,
+            "fuel_level": 16.599999999999994,
             "tire_wear": 0.5499999999999996,
             "failure": "No failure",
             "weather": "Sunny",
@@ -370,26 +368,26 @@
     {
         "lap_number": 30,
         "lap_data": {
-            "lap_time": 1367.8999999999999,
+            "lap_time": 1188.5,
             "fuel_level": 35,
             "tire_wear": 1,
-            "failure": "Cooling system",
+            "failure": "No failure",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": {
                 "repairs": [
-                    "Cooling system"
+                    "Brakes overheat"
                 ],
-                "fuel_amount": 20.2,
+                "fuel_amount": 20.500000000000007,
                 "tires_change": true,
-                "time in pitstop": 1000.4
+                "time in pitstop": 701.0
             }
         }
     },
     {
         "lap_number": 31,
         "lap_data": {
-            "lap_time": 420.0,
+            "lap_time": 500.0,
             "fuel_level": 33,
             "tire_wear": 0.95,
             "failure": "No failure",
@@ -401,10 +399,10 @@
     {
         "lap_number": 32,
         "lap_data": {
-            "lap_time": 472.5,
-            "fuel_level": 30.7,
+            "lap_time": 487.5,
+            "fuel_level": 31,
             "tire_wear": 0.8999999999999999,
-            "failure": "Electronics malfunction",
+            "failure": "No failure",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -413,10 +411,10 @@
     {
         "lap_number": 33,
         "lap_data": {
-            "lap_time": 462.0,
-            "fuel_level": 28.4,
+            "lap_time": 525.0,
+            "fuel_level": 28.8,
             "tire_wear": 0.8499999999999999,
-            "failure": "No failure",
+            "failure": "Cooling system",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -425,10 +423,10 @@
     {
         "lap_number": 34,
         "lap_data": {
-            "lap_time": 577.5,
-            "fuel_level": 25.099999999999998,
+            "lap_time": 512.5,
+            "fuel_level": 26.560000000000002,
             "tire_wear": 0.7999999999999998,
-            "failure": "Gearbox failure",
+            "failure": "Tire puncture",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -437,8 +435,8 @@
     {
         "lap_number": 35,
         "lap_data": {
-            "lap_time": 567.0,
-            "fuel_level": 21.799999999999997,
+            "lap_time": 499.99999999999994,
+            "fuel_level": 24.320000000000004,
             "tire_wear": 0.7499999999999998,
             "failure": "No failure",
             "weather": "Sunny",
@@ -449,11 +447,11 @@
     {
         "lap_number": 36,
         "lap_data": {
-            "lap_time": 556.5,
-            "fuel_level": 18.499999999999996,
+            "lap_time": 487.49999999999994,
+            "fuel_level": 22.040000000000003,
             "tire_wear": 0.6999999999999997,
-            "failure": "No failure",
-            "weather": "Sunny",
+            "failure": "Tire puncture",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -461,10 +459,10 @@
     {
         "lap_number": 37,
         "lap_data": {
-            "lap_time": 546.0,
-            "fuel_level": 15.199999999999996,
+            "lap_time": 662.5,
+            "fuel_level": 18.560000000000002,
             "tire_wear": 0.6499999999999997,
-            "failure": "No failure",
+            "failure": "Engine overheating",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -473,8 +471,8 @@
     {
         "lap_number": 38,
         "lap_data": {
-            "lap_time": 535.5,
-            "fuel_level": 11.899999999999995,
+            "lap_time": 649.9999999999999,
+            "fuel_level": 15.080000000000002,
             "tire_wear": 0.5999999999999996,
             "failure": "No failure",
             "weather": "Sunny",
@@ -485,8 +483,8 @@
     {
         "lap_number": 39,
         "lap_data": {
-            "lap_time": 524.9999999999999,
-            "fuel_level": 8.599999999999994,
+            "lap_time": 637.4999999999999,
+            "fuel_level": 11.600000000000001,
             "tire_wear": 0.5499999999999996,
             "failure": "No failure",
             "weather": "Sunny",
@@ -497,28 +495,29 @@
     {
         "lap_number": 40,
         "lap_data": {
-            "lap_time": 8746.8,
+            "lap_time": 5238.76,
             "fuel_level": 35,
             "tire_wear": 1,
-            "failure": "Engine overheating",
+            "failure": "No failure",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": {
                 "repairs": [
-                    "Electronics malfunction",
-                    "Gearbox failure",
+                    "Cooling system",
+                    "Tire puncture",
+                    "Tire puncture",
                     "Engine overheating"
                 ],
-                "fuel_amount": 30.900000000000006,
+                "fuel_amount": 26.88,
                 "tires_change": true,
-                "time in pitstop": 8221.8
+                "time in pitstop": 4613.76
             }
         }
     },
     {
         "lap_number": 41,
         "lap_data": {
-            "lap_time": 420.0,
+            "lap_time": 500.0,
             "fuel_level": 33,
             "tire_wear": 0.95,
             "failure": "No failure",
@@ -530,7 +529,7 @@
     {
         "lap_number": 42,
         "lap_data": {
-            "lap_time": 409.5,
+            "lap_time": 487.5,
             "fuel_level": 31,
             "tire_wear": 0.8999999999999999,
             "failure": "No failure",
@@ -542,10 +541,10 @@
     {
         "lap_number": 43,
         "lap_data": {
-            "lap_time": 441.0,
-            "fuel_level": 28.8,
+            "lap_time": 675.0,
+            "fuel_level": 28.9,
             "tire_wear": 0.8499999999999999,
-            "failure": "Cooling system",
+            "failure": "Brakes system",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -554,10 +553,10 @@
     {
         "lap_number": 44,
         "lap_data": {
-            "lap_time": 430.5,
-            "fuel_level": 26.6,
+            "lap_time": 662.5,
+            "fuel_level": 26.7,
             "tire_wear": 0.7999999999999998,
-            "failure": "No failure",
+            "failure": "Tire blowout",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -566,10 +565,10 @@
     {
         "lap_number": 45,
         "lap_data": {
-            "lap_time": 420.0,
-            "fuel_level": 24.400000000000002,
+            "lap_time": 650.0,
+            "fuel_level": 24.099999999999998,
             "tire_wear": 0.7499999999999998,
-            "failure": "No failure",
+            "failure": "Suspension damage",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -578,10 +577,10 @@
     {
         "lap_number": 46,
         "lap_data": {
-            "lap_time": 409.49999999999994,
-            "fuel_level": 22.200000000000003,
+            "lap_time": 637.5,
+            "fuel_level": 21.459999999999997,
             "tire_wear": 0.6999999999999997,
-            "failure": "No failure",
+            "failure": "Tire puncture",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -590,10 +589,10 @@
     {
         "lap_number": 47,
         "lap_data": {
-            "lap_time": 398.99999999999994,
-            "fuel_level": 20.000000000000004,
+            "lap_time": 625.0,
+            "fuel_level": 18.72,
             "tire_wear": 0.6499999999999997,
-            "failure": "No failure",
+            "failure": "Brakes overheat",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -602,11 +601,11 @@
     {
         "lap_number": 48,
         "lap_data": {
-            "lap_time": 514.5,
-            "fuel_level": 17.700000000000003,
+            "lap_time": 612.4999999999999,
+            "fuel_level": 15.979999999999999,
             "tire_wear": 0.5999999999999996,
-            "failure": "Tire blowout",
-            "weather": "Sunny",
+            "failure": "No failure",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -614,11 +613,11 @@
     {
         "lap_number": 49,
         "lap_data": {
-            "lap_time": 503.99999999999994,
-            "fuel_level": 15.400000000000002,
+            "lap_time": 599.9999999999999,
+            "fuel_level": 13.239999999999998,
             "tire_wear": 0.5499999999999996,
             "failure": "No failure",
-            "weather": "Sunny",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -626,32 +625,34 @@
     {
         "lap_number": 50,
         "lap_data": {
-            "lap_time": 4498.099999999999,
+            "lap_time": 5796.5,
             "fuel_level": 35,
             "tire_wear": 1,
-            "failure": "Suspension damage",
-            "weather": "Sunny",
+            "failure": "No failure",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": {
                 "repairs": [
-                    "Cooling system",
+                    "Brakes system",
                     "Tire blowout",
-                    "Suspension damage"
+                    "Suspension damage",
+                    "Tire puncture",
+                    "Brakes overheat"
                 ],
-                "fuel_amount": 22.299999999999997,
+                "fuel_amount": 24.5,
                 "tires_change": true,
-                "time in pitstop": 4004.6
+                "time in pitstop": 5209.0
             }
         }
     },
     {
         "lap_number": 51,
         "lap_data": {
-            "lap_time": 588.0,
-            "fuel_level": 32.9,
+            "lap_time": 500,
+            "fuel_level": 33,
             "tire_wear": 0.95,
-            "failure": "Tire blowout",
-            "weather": "Sunny",
+            "failure": "No failure",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -659,10 +660,10 @@
     {
         "lap_number": 52,
         "lap_data": {
-            "lap_time": 577.5,
-            "fuel_level": 30.799999999999997,
+            "lap_time": 562.5,
+            "fuel_level": 30.7,
             "tire_wear": 0.8999999999999999,
-            "failure": "No failure",
+            "failure": "Electronics malfunction",
             "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
@@ -671,10 +672,10 @@
     {
         "lap_number": 53,
         "lap_data": {
-            "lap_time": 567.0,
-            "fuel_level": 28.699999999999996,
+            "lap_time": 650.0,
+            "fuel_level": 27.599999999999998,
             "tire_wear": 0.8499999999999999,
-            "failure": "No failure",
+            "failure": "Turbo",
             "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
@@ -683,8 +684,8 @@
     {
         "lap_number": 54,
         "lap_data": {
-            "lap_time": 556.5,
-            "fuel_level": 26.599999999999994,
+            "lap_time": 637.5,
+            "fuel_level": 24.499999999999996,
             "tire_wear": 0.7999999999999998,
             "failure": "No failure",
             "weather": "Cloudy",
@@ -695,10 +696,10 @@
     {
         "lap_number": 55,
         "lap_data": {
-            "lap_time": 546.0,
-            "fuel_level": 24.399999999999995,
+            "lap_time": 625.0,
+            "fuel_level": 21.399999999999995,
             "tire_wear": 0.7499999999999998,
-            "failure": "Tire blowout",
+            "failure": "No failure",
             "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
@@ -707,10 +708,10 @@
     {
         "lap_number": 56,
         "lap_data": {
-            "lap_time": 535.5,
-            "fuel_level": 22.099999999999994,
+            "lap_time": 612.5,
+            "fuel_level": 18.099999999999994,
             "tire_wear": 0.6999999999999997,
-            "failure": "Brakes overheat",
+            "failure": "Cooling system",
             "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
@@ -719,11 +720,11 @@
     {
         "lap_number": 57,
         "lap_data": {
-            "lap_time": 567.0,
-            "fuel_level": 19.599999999999994,
+            "lap_time": 600.0,
+            "fuel_level": 14.799999999999994,
             "tire_wear": 0.6499999999999997,
-            "failure": "Cooling system",
-            "weather": "Light rain",
+            "failure": "No failure",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -731,11 +732,11 @@
     {
         "lap_number": 58,
         "lap_data": {
-            "lap_time": 556.5,
-            "fuel_level": 17.099999999999994,
+            "lap_time": 587.4999999999999,
+            "fuel_level": 11.399999999999993,
             "tire_wear": 0.5999999999999996,
-            "failure": "No failure",
-            "weather": "Light rain",
+            "failure": "Brakes overheat",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -743,11 +744,11 @@
     {
         "lap_number": 59,
         "lap_data": {
-            "lap_time": 629.9999999999999,
-            "fuel_level": 14.559999999999995,
+            "lap_time": 574.9999999999999,
+            "fuel_level": 7.999999999999993,
             "tire_wear": 0.5499999999999996,
-            "failure": "Tire puncture",
-            "weather": "Heavy rain",
+            "failure": "No failure",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -755,35 +756,33 @@
     {
         "lap_number": 60,
         "lap_data": {
-            "lap_time": 4625.86,
+            "lap_time": 5483.3,
             "fuel_level": 35,
             "tire_wear": 1,
-            "failure": "Cooling system",
-            "weather": "Heavy rain",
+            "failure": "No failure",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": {
                 "repairs": [
-                    "Tire blowout",
-                    "Tire blowout",
-                    "Brakes overheat",
+                    "Electronics malfunction",
+                    "Turbo",
                     "Cooling system",
-                    "Tire puncture",
-                    "Cooling system"
+                    "Brakes overheat"
                 ],
-                "fuel_amount": 23.180000000000007,
+                "fuel_amount": 30.400000000000006,
                 "tires_change": true,
-                "time in pitstop": 4006.36
+                "time in pitstop": 4920.8
             }
         }
     },
     {
         "lap_number": 61,
         "lap_data": {
-            "lap_time": 546.0,
+            "lap_time": 500.0,
             "fuel_level": 33,
             "tire_wear": 0.95,
             "failure": "No failure",
-            "weather": "Heavy rain",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -791,11 +790,11 @@
     {
         "lap_number": 62,
         "lap_data": {
-            "lap_time": 703.5,
-            "fuel_level": 30.9,
+            "lap_time": 512.5,
+            "fuel_level": 30.96,
             "tire_wear": 0.8999999999999999,
-            "failure": "Tire blowout",
-            "weather": "Heavy rain",
+            "failure": "Tire puncture",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -803,11 +802,11 @@
     {
         "lap_number": 63,
         "lap_data": {
-            "lap_time": 609.0,
-            "fuel_level": 28.0,
+            "lap_time": 675.0,
+            "fuel_level": 28.82,
             "tire_wear": 0.8499999999999999,
-            "failure": "Fuel pump issue",
-            "weather": "Light rain",
+            "failure": "Tire blowout",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -815,11 +814,11 @@
     {
         "lap_number": 64,
         "lap_data": {
-            "lap_time": 598.5,
-            "fuel_level": 25.1,
+            "lap_time": 662.5,
+            "fuel_level": 26.68,
             "tire_wear": 0.7999999999999998,
             "failure": "No failure",
-            "weather": "Light rain",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -827,11 +826,11 @@
     {
         "lap_number": 65,
         "lap_data": {
-            "lap_time": 588.0,
-            "fuel_level": 22.200000000000003,
+            "lap_time": 650.0,
+            "fuel_level": 24.54,
             "tire_wear": 0.7499999999999998,
             "failure": "No failure",
-            "weather": "Light rain",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -839,11 +838,11 @@
     {
         "lap_number": 66,
         "lap_data": {
-            "lap_time": 577.5,
-            "fuel_level": 19.300000000000004,
+            "lap_time": 637.5,
+            "fuel_level": 22.3,
             "tire_wear": 0.6999999999999997,
-            "failure": "No failure",
-            "weather": "Light rain",
+            "failure": "Brakes overheat",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -851,8 +850,8 @@
     {
         "lap_number": 67,
         "lap_data": {
-            "lap_time": 525.0,
-            "fuel_level": 16.400000000000006,
+            "lap_time": 625.0,
+            "fuel_level": 20.060000000000002,
             "tire_wear": 0.6499999999999997,
             "failure": "No failure",
             "weather": "Sunny",
@@ -863,11 +862,11 @@
     {
         "lap_number": 68,
         "lap_data": {
-            "lap_time": 514.5,
-            "fuel_level": 13.000000000000005,
+            "lap_time": 612.4999999999999,
+            "fuel_level": 17.820000000000004,
             "tire_wear": 0.5999999999999996,
-            "failure": "Hydraulic leak",
-            "weather": "Cloudy",
+            "failure": "No failure",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -875,11 +874,11 @@
     {
         "lap_number": 69,
         "lap_data": {
-            "lap_time": 503.99999999999994,
-            "fuel_level": 9.600000000000005,
+            "lap_time": 599.9999999999999,
+            "fuel_level": 15.540000000000004,
             "tire_wear": 0.5499999999999996,
-            "failure": "No failure",
-            "weather": "Cloudy",
+            "failure": "Tire puncture",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -887,32 +886,34 @@
     {
         "lap_number": 70,
         "lap_data": {
-            "lap_time": 4211.099999999999,
+            "lap_time": 3091.18,
             "fuel_level": 35,
             "tire_wear": 1,
-            "failure": "No failure",
-            "weather": "Cloudy",
+            "failure": "Brakes overheat",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": {
                 "repairs": [
+                    "Tire puncture",
                     "Tire blowout",
-                    "Fuel pump issue",
-                    "Hydraulic leak"
+                    "Brakes overheat",
+                    "Tire puncture",
+                    "Brakes overheat"
                 ],
-                "fuel_amount": 28.799999999999997,
+                "fuel_amount": 21.839999999999996,
                 "tires_change": true,
-                "time in pitstop": 3717.6
+                "time in pitstop": 2503.68
             }
         }
     },
     {
         "lap_number": 71,
         "lap_data": {
-            "lap_time": 420,
+            "lap_time": 500.0,
             "fuel_level": 33,
             "tire_wear": 0.95,
             "failure": "No failure",
-            "weather": "Cloudy",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -920,7 +921,7 @@
     {
         "lap_number": 72,
         "lap_data": {
-            "lap_time": 409.5,
+            "lap_time": 487.5,
             "fuel_level": 31,
             "tire_wear": 0.8999999999999999,
             "failure": "No failure",
@@ -932,10 +933,10 @@
     {
         "lap_number": 73,
         "lap_data": {
-            "lap_time": 399.0,
-            "fuel_level": 29,
+            "lap_time": 675.0,
+            "fuel_level": 28.9,
             "tire_wear": 0.8499999999999999,
-            "failure": "No failure",
+            "failure": "Tire blowout",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -944,11 +945,11 @@
     {
         "lap_number": 74,
         "lap_data": {
-            "lap_time": 472.5,
-            "fuel_level": 26.9,
+            "lap_time": 662.5,
+            "fuel_level": 26.799999999999997,
             "tire_wear": 0.7999999999999998,
-            "failure": "Brakes overheat",
-            "weather": "Sunny",
+            "failure": "No failure",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -956,11 +957,11 @@
     {
         "lap_number": 75,
         "lap_data": {
-            "lap_time": 546.0,
-            "fuel_level": 24.7,
+            "lap_time": 650.0,
+            "fuel_level": 24.499999999999996,
             "tire_wear": 0.7499999999999998,
-            "failure": "Tire blowout",
-            "weather": "Sunny",
+            "failure": "Cooling system",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -968,11 +969,11 @@
     {
         "lap_number": 76,
         "lap_data": {
-            "lap_time": 535.5,
-            "fuel_level": 22.5,
+            "lap_time": 637.5,
+            "fuel_level": 22.199999999999996,
             "tire_wear": 0.6999999999999997,
             "failure": "No failure",
-            "weather": "Sunny",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -980,11 +981,11 @@
     {
         "lap_number": 77,
         "lap_data": {
-            "lap_time": 525.0,
-            "fuel_level": 20.1,
+            "lap_time": 675.0,
+            "fuel_level": 19.899999999999995,
             "tire_wear": 0.6499999999999997,
-            "failure": "Cooling system",
-            "weather": "Sunny",
+            "failure": "No failure",
+            "weather": "Light rain",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -992,8 +993,8 @@
     {
         "lap_number": 78,
         "lap_data": {
-            "lap_time": 514.5,
-            "fuel_level": 17.700000000000003,
+            "lap_time": 612.4999999999999,
+            "fuel_level": 17.599999999999994,
             "tire_wear": 0.5999999999999996,
             "failure": "No failure",
             "weather": "Sunny",
@@ -1004,11 +1005,11 @@
     {
         "lap_number": 79,
         "lap_data": {
-            "lap_time": 503.99999999999994,
-            "fuel_level": 15.000000000000004,
+            "lap_time": 599.9999999999999,
+            "fuel_level": 15.299999999999994,
             "tire_wear": 0.5499999999999996,
-            "failure": "Electronics malfunction",
-            "weather": "Cloudy",
+            "failure": "No failure",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1016,33 +1017,31 @@
     {
         "lap_number": 80,
         "lap_data": {
-            "lap_time": 4198.9,
+            "lap_time": 2191.5,
             "fuel_level": 35,
             "tire_wear": 1,
             "failure": "No failure",
-            "weather": "Cloudy",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": {
                 "repairs": [
-                    "Brakes overheat",
                     "Tire blowout",
-                    "Cooling system",
-                    "Electronics malfunction"
+                    "Cooling system"
                 ],
-                "fuel_amount": 22.699999999999996,
+                "fuel_amount": 22.000000000000007,
                 "tires_change": true,
-                "time in pitstop": 3705.4
+                "time in pitstop": 1604.0
             }
         }
     },
     {
         "lap_number": 81,
         "lap_data": {
-            "lap_time": 420,
+            "lap_time": 500.0,
             "fuel_level": 33,
             "tire_wear": 0.95,
             "failure": "No failure",
-            "weather": "Cloudy",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1050,11 +1049,11 @@
     {
         "lap_number": 82,
         "lap_data": {
-            "lap_time": 409.5,
+            "lap_time": 487.5,
             "fuel_level": 31,
             "tire_wear": 0.8999999999999999,
             "failure": "No failure",
-            "weather": "Cloudy",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1062,11 +1061,11 @@
     {
         "lap_number": 83,
         "lap_data": {
-            "lap_time": 420.0,
-            "fuel_level": 28.96,
+            "lap_time": 475.0,
+            "fuel_level": 29,
             "tire_wear": 0.8499999999999999,
-            "failure": "Tire puncture",
-            "weather": "Cloudy",
+            "failure": "No failure",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1074,11 +1073,11 @@
     {
         "lap_number": 84,
         "lap_data": {
-            "lap_time": 409.5,
-            "fuel_level": 26.92,
+            "lap_time": 462.5,
+            "fuel_level": 27,
             "tire_wear": 0.7999999999999998,
             "failure": "No failure",
-            "weather": "Cloudy",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1086,11 +1085,11 @@
     {
         "lap_number": 85,
         "lap_data": {
-            "lap_time": 399.0,
-            "fuel_level": 24.880000000000003,
+            "lap_time": 449.99999999999994,
+            "fuel_level": 25,
             "tire_wear": 0.7499999999999998,
             "failure": "No failure",
-            "weather": "Cloudy",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1098,11 +1097,11 @@
     {
         "lap_number": 86,
         "lap_data": {
-            "lap_time": 514.5,
-            "fuel_level": 22.040000000000003,
+            "lap_time": 437.49999999999994,
+            "fuel_level": 23,
             "tire_wear": 0.6999999999999997,
-            "failure": "Turbo",
-            "weather": "Cloudy",
+            "failure": "No failure",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1110,11 +1109,11 @@
     {
         "lap_number": 87,
         "lap_data": {
-            "lap_time": 503.99999999999994,
-            "fuel_level": 18.700000000000003,
+            "lap_time": 424.99999999999994,
+            "fuel_level": 21,
             "tire_wear": 0.6499999999999997,
-            "failure": "Hydraulic leak",
-            "weather": "Cloudy",
+            "failure": "No failure",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1122,10 +1121,10 @@
     {
         "lap_number": 88,
         "lap_data": {
-            "lap_time": 493.49999999999994,
-            "fuel_level": 15.320000000000002,
+            "lap_time": 412.4999999999999,
+            "fuel_level": 19,
             "tire_wear": 0.5999999999999996,
-            "failure": "Tire puncture",
+            "failure": "No failure",
             "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
@@ -1134,8 +1133,8 @@
     {
         "lap_number": 89,
         "lap_data": {
-            "lap_time": 482.99999999999994,
-            "fuel_level": 11.940000000000001,
+            "lap_time": 399.9999999999999,
+            "fuel_level": 17,
             "tire_wear": 0.5499999999999996,
             "failure": "No failure",
             "weather": "Cloudy",
@@ -1146,33 +1145,28 @@
     {
         "lap_number": 90,
         "lap_data": {
-            "lap_time": 4985.38,
+            "lap_time": 487.4999999999999,
             "fuel_level": 35,
             "tire_wear": 1,
             "failure": "No failure",
             "weather": "Cloudy",
             "tires": "soft",
             "pitstop": {
-                "repairs": [
-                    "Tire puncture",
-                    "Turbo",
-                    "Hydraulic leak",
-                    "Tire puncture"
-                ],
-                "fuel_amount": 26.439999999999998,
+                "repairs": [],
+                "fuel_amount": 20,
                 "tires_change": true,
-                "time in pitstop": 4512.88
+                "time in pitstop": 100
             }
         }
     },
     {
         "lap_number": 91,
         "lap_data": {
-            "lap_time": 420.0,
-            "fuel_level": 33,
+            "lap_time": 700.0,
+            "fuel_level": 32.9,
             "tire_wear": 0.95,
-            "failure": "No failure",
-            "weather": "Sunny",
+            "failure": "Tire blowout",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1180,10 +1174,10 @@
     {
         "lap_number": 92,
         "lap_data": {
-            "lap_time": 430.5,
-            "fuel_level": 30.96,
+            "lap_time": 687.5,
+            "fuel_level": 30.599999999999998,
             "tire_wear": 0.8999999999999999,
-            "failure": "Tire puncture",
+            "failure": "Cooling system",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -1192,10 +1186,10 @@
     {
         "lap_number": 93,
         "lap_data": {
-            "lap_time": 598.5,
-            "fuel_level": 27.720000000000002,
+            "lap_time": 675.0,
+            "fuel_level": 28.299999999999997,
             "tire_wear": 0.8499999999999999,
-            "failure": "Engine overheating",
+            "failure": "No failure",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -1204,10 +1198,10 @@
     {
         "lap_number": 94,
         "lap_data": {
-            "lap_time": 588.0,
-            "fuel_level": 24.480000000000004,
+            "lap_time": 662.5,
+            "fuel_level": 25.9,
             "tire_wear": 0.7999999999999998,
-            "failure": "No failure",
+            "failure": "Tire blowout",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -1216,255 +1210,9 @@
     {
         "lap_number": 95,
         "lap_data": {
-            "lap_time": 577.5,
-            "fuel_level": 21.240000000000006,
+            "lap_time": 650.0,
+            "fuel_level": 23.4,
             "tire_wear": 0.7499999999999998,
-            "failure": "No failure",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 96,
-        "lap_data": {
-            "lap_time": 567.0,
-            "fuel_level": 18.000000000000007,
-            "tire_wear": 0.6999999999999997,
-            "failure": "No failure",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 97,
-        "lap_data": {
-            "lap_time": 556.5,
-            "fuel_level": 14.760000000000007,
-            "tire_wear": 0.6499999999999997,
-            "failure": "No failure",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 98,
-        "lap_data": {
-            "lap_time": 546.0,
-            "fuel_level": 11.520000000000007,
-            "tire_wear": 0.5999999999999996,
-            "failure": "No failure",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 99,
-        "lap_data": {
-            "lap_time": 535.4999999999999,
-            "fuel_level": 8.280000000000006,
-            "tire_wear": 0.5499999999999996,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 100,
-        "lap_data": {
-            "lap_time": 5445.52,
-            "fuel_level": 35,
-            "tire_wear": 1,
-            "failure": "Electronics malfunction",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": {
-                "repairs": [
-                    "Tire puncture",
-                    "Engine overheating",
-                    "Electronics malfunction"
-                ],
-                "fuel_amount": 30.259999999999994,
-                "tires_change": true,
-                "time in pitstop": 4920.52
-            }
-        }
-    },
-    {
-        "lap_number": 101,
-        "lap_data": {
-            "lap_time": 462.0,
-            "fuel_level": 32.8,
-            "tire_wear": 0.95,
-            "failure": "Cooling system",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 102,
-        "lap_data": {
-            "lap_time": 451.5,
-            "fuel_level": 30.599999999999998,
-            "tire_wear": 0.8999999999999999,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 103,
-        "lap_data": {
-            "lap_time": 441.0,
-            "fuel_level": 28.4,
-            "tire_wear": 0.8499999999999999,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 104,
-        "lap_data": {
-            "lap_time": 430.5,
-            "fuel_level": 26.2,
-            "tire_wear": 0.7999999999999998,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 105,
-        "lap_data": {
-            "lap_time": 420.0,
-            "fuel_level": 24.0,
-            "tire_wear": 0.7499999999999998,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 106,
-        "lap_data": {
-            "lap_time": 409.49999999999994,
-            "fuel_level": 21.8,
-            "tire_wear": 0.6999999999999997,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 107,
-        "lap_data": {
-            "lap_time": 556.5,
-            "fuel_level": 18.400000000000002,
-            "tire_wear": 0.6499999999999997,
-            "failure": "Engine overheating",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 108,
-        "lap_data": {
-            "lap_time": 546.0,
-            "fuel_level": 15.000000000000002,
-            "tire_wear": 0.5999999999999996,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 109,
-        "lap_data": {
-            "lap_time": 535.4999999999999,
-            "fuel_level": 11.600000000000001,
-            "tire_wear": 0.5499999999999996,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 110,
-        "lap_data": {
-            "lap_time": 5138.8,
-            "fuel_level": 35,
-            "tire_wear": 1,
-            "failure": "Tire blowout",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": {
-                "repairs": [
-                    "Cooling system",
-                    "Engine overheating",
-                    "Tire blowout"
-                ],
-                "fuel_amount": 26.9,
-                "tires_change": true,
-                "time in pitstop": 4613.8
-            }
-        }
-    },
-    {
-        "lap_number": 111,
-        "lap_data": {
-            "lap_time": 420,
-            "fuel_level": 33,
-            "tire_wear": 0.95,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 112,
-        "lap_data": {
-            "lap_time": 409.5,
-            "fuel_level": 31,
-            "tire_wear": 0.8999999999999999,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 113,
-        "lap_data": {
-            "lap_time": 399.0,
-            "fuel_level": 29,
-            "tire_wear": 0.8499999999999999,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 114,
-        "lap_data": {
-            "lap_time": 472.5,
-            "fuel_level": 26.9,
-            "tire_wear": 0.7999999999999998,
             "failure": "Brakes overheat",
             "weather": "Cloudy",
             "tires": "soft",
@@ -1472,46 +1220,34 @@
         }
     },
     {
-        "lap_number": 115,
+        "lap_number": 96,
         "lap_data": {
-            "lap_time": 504.0,
-            "fuel_level": 24.799999999999997,
-            "tire_wear": 0.7499999999999998,
-            "failure": "No failure",
-            "weather": "Light rain",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 116,
-        "lap_data": {
-            "lap_time": 493.49999999999994,
-            "fuel_level": 22.699999999999996,
+            "lap_time": 637.5,
+            "fuel_level": 20.9,
             "tire_wear": 0.6999999999999997,
             "failure": "No failure",
-            "weather": "Light rain",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
     },
     {
-        "lap_number": 117,
+        "lap_number": 97,
         "lap_data": {
-            "lap_time": 482.99999999999994,
-            "fuel_level": 20.599999999999994,
+            "lap_time": 675.0,
+            "fuel_level": 18.099999999999998,
             "tire_wear": 0.6499999999999997,
-            "failure": "No failure",
+            "failure": "Electronics malfunction",
             "weather": "Light rain",
             "tires": "soft",
             "pitstop": "No"
         }
     },
     {
-        "lap_number": 118,
+        "lap_number": 98,
         "lap_data": {
-            "lap_time": 472.49999999999994,
-            "fuel_level": 18.499999999999993,
+            "lap_time": 662.4999999999999,
+            "fuel_level": 15.299999999999997,
             "tire_wear": 0.5999999999999996,
             "failure": "No failure",
             "weather": "Light rain",
@@ -1520,21 +1256,154 @@
         }
     },
     {
-        "lap_number": 119,
+        "lap_number": 99,
         "lap_data": {
-            "lap_time": 461.99999999999994,
-            "fuel_level": 16.199999999999992,
+            "lap_time": 649.9999999999999,
+            "fuel_level": 12.399999999999997,
             "tire_wear": 0.5499999999999996,
-            "failure": "Cooling system",
+            "failure": "Brakes system",
             "weather": "Light rain",
             "tires": "soft",
             "pitstop": "No"
         }
     },
     {
-        "lap_number": 120,
+        "lap_number": 100,
         "lap_data": {
-            "lap_time": 2137.7,
+            "lap_time": 6848.7,
+            "fuel_level": 35,
+            "tire_wear": 1,
+            "failure": "Brakes overheat",
+            "weather": "Heavy rain",
+            "tires": "soft",
+            "pitstop": {
+                "repairs": [
+                    "Tire blowout",
+                    "Cooling system",
+                    "Tire blowout",
+                    "Brakes overheat",
+                    "Electronics malfunction",
+                    "Brakes system",
+                    "Brakes overheat"
+                ],
+                "fuel_amount": 25.6,
+                "tires_change": true,
+                "time in pitstop": 6111.2
+            }
+        }
+    },
+    {
+        "lap_number": 101,
+        "lap_data": {
+            "lap_time": 550.0,
+            "fuel_level": 33,
+            "tire_wear": 0.95,
+            "failure": "No failure",
+            "weather": "Light rain",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 102,
+        "lap_data": {
+            "lap_time": 737.5,
+            "fuel_level": 30.9,
+            "tire_wear": 0.8999999999999999,
+            "failure": "Brakes overheat",
+            "weather": "Heavy rain",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 103,
+        "lap_data": {
+            "lap_time": 725.0,
+            "fuel_level": 28.799999999999997,
+            "tire_wear": 0.8499999999999999,
+            "failure": "No failure",
+            "weather": "Heavy rain",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 104,
+        "lap_data": {
+            "lap_time": 787.5,
+            "fuel_level": 26.699999999999996,
+            "tire_wear": 0.7999999999999998,
+            "failure": "No failure",
+            "weather": "Thunderstorms",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 105,
+        "lap_data": {
+            "lap_time": 775.0,
+            "fuel_level": 24.599999999999994,
+            "tire_wear": 0.7499999999999998,
+            "failure": "No failure",
+            "weather": "Thunderstorms",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 106,
+        "lap_data": {
+            "lap_time": 812.5,
+            "fuel_level": 21.499999999999993,
+            "tire_wear": 0.6999999999999997,
+            "failure": "Gearbox failure",
+            "weather": "Heavy rain",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 107,
+        "lap_data": {
+            "lap_time": 800.0,
+            "fuel_level": 18.39999999999999,
+            "tire_wear": 0.6499999999999997,
+            "failure": "No failure",
+            "weather": "Heavy rain",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 108,
+        "lap_data": {
+            "lap_time": 787.4999999999999,
+            "fuel_level": 15.299999999999992,
+            "tire_wear": 0.5999999999999996,
+            "failure": "No failure",
+            "weather": "Heavy rain",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 109,
+        "lap_data": {
+            "lap_time": 774.9999999999999,
+            "fuel_level": 12.199999999999992,
+            "tire_wear": 0.5499999999999996,
+            "failure": "No failure",
+            "weather": "Heavy rain",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 110,
+        "lap_data": {
+            "lap_time": 5074.3,
             "fuel_level": 35,
             "tire_wear": 1,
             "failure": "No failure",
@@ -1543,22 +1412,153 @@
             "pitstop": {
                 "repairs": [
                     "Brakes overheat",
-                    "Cooling system"
+                    "Gearbox failure"
                 ],
-                "fuel_amount": 21.10000000000001,
+                "fuel_amount": 25.900000000000006,
                 "tires_change": true,
-                "time in pitstop": 1602.2
+                "time in pitstop": 4311.8
+            }
+        }
+    },
+    {
+        "lap_number": 111,
+        "lap_data": {
+            "lap_time": 725.0,
+            "fuel_level": 32.7,
+            "tire_wear": 0.95,
+            "failure": "Electronics malfunction",
+            "weather": "Heavy rain",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 112,
+        "lap_data": {
+            "lap_time": 712.5,
+            "fuel_level": 30.360000000000003,
+            "tire_wear": 0.8999999999999999,
+            "failure": "Tire puncture",
+            "weather": "Heavy rain",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 113,
+        "lap_data": {
+            "lap_time": 600.0,
+            "fuel_level": 27.820000000000004,
+            "tire_wear": 0.8499999999999999,
+            "failure": "Cooling system",
+            "weather": "Light rain",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 114,
+        "lap_data": {
+            "lap_time": 587.5,
+            "fuel_level": 25.280000000000005,
+            "tire_wear": 0.7999999999999998,
+            "failure": "No failure",
+            "weather": "Light rain",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 115,
+        "lap_data": {
+            "lap_time": 525.0,
+            "fuel_level": 22.700000000000006,
+            "tire_wear": 0.7499999999999998,
+            "failure": "Tire puncture",
+            "weather": "Sunny",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 116,
+        "lap_data": {
+            "lap_time": 587.5,
+            "fuel_level": 19.720000000000006,
+            "tire_wear": 0.6999999999999997,
+            "failure": "Suspension damage",
+            "weather": "Sunny",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 117,
+        "lap_data": {
+            "lap_time": 575.0,
+            "fuel_level": 16.740000000000006,
+            "tire_wear": 0.6499999999999997,
+            "failure": "No failure",
+            "weather": "Sunny",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 118,
+        "lap_data": {
+            "lap_time": 562.4999999999999,
+            "fuel_level": 13.760000000000005,
+            "tire_wear": 0.5999999999999996,
+            "failure": "No failure",
+            "weather": "Sunny",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 119,
+        "lap_data": {
+            "lap_time": 549.9999999999999,
+            "fuel_level": 10.780000000000005,
+            "tire_wear": 0.5499999999999996,
+            "failure": "No failure",
+            "weather": "Sunny",
+            "tires": "soft",
+            "pitstop": "No"
+        }
+    },
+    {
+        "lap_number": 120,
+        "lap_data": {
+            "lap_time": 6051.9,
+            "fuel_level": 35,
+            "tire_wear": 1,
+            "failure": "No failure",
+            "weather": "Sunny",
+            "tires": "soft",
+            "pitstop": {
+                "repairs": [
+                    "Electronics malfunction",
+                    "Tire puncture",
+                    "Cooling system",
+                    "Tire puncture",
+                    "Suspension damage"
+                ],
+                "fuel_amount": 27.199999999999996,
+                "tires_change": true,
+                "time in pitstop": 5514.4
             }
         }
     },
     {
         "lap_number": 121,
         "lap_data": {
-            "lap_time": 546.0,
+            "lap_time": 500.0,
             "fuel_level": 33,
             "tire_wear": 0.95,
             "failure": "No failure",
-            "weather": "Heavy rain",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1566,11 +1566,11 @@
     {
         "lap_number": 122,
         "lap_data": {
-            "lap_time": 535.5,
+            "lap_time": 487.5,
             "fuel_level": 31,
             "tire_wear": 0.8999999999999999,
             "failure": "No failure",
-            "weather": "Heavy rain",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1578,11 +1578,11 @@
     {
         "lap_number": 123,
         "lap_data": {
-            "lap_time": 441.0,
+            "lap_time": 475.0,
             "fuel_level": 29,
             "tire_wear": 0.8499999999999999,
             "failure": "No failure",
-            "weather": "Light rain",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1590,11 +1590,11 @@
     {
         "lap_number": 124,
         "lap_data": {
-            "lap_time": 430.5,
+            "lap_time": 462.5,
             "fuel_level": 27,
             "tire_wear": 0.7999999999999998,
             "failure": "No failure",
-            "weather": "Light rain",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1602,11 +1602,11 @@
     {
         "lap_number": 125,
         "lap_data": {
-            "lap_time": 504.0,
+            "lap_time": 449.99999999999994,
             "fuel_level": 25,
             "tire_wear": 0.7499999999999998,
             "failure": "No failure",
-            "weather": "Heavy rain",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1614,11 +1614,11 @@
     {
         "lap_number": 126,
         "lap_data": {
-            "lap_time": 556.5,
-            "fuel_level": 23,
+            "lap_time": 562.5,
+            "fuel_level": 22.2,
             "tire_wear": 0.6999999999999997,
-            "failure": "No failure",
-            "weather": "Thunderstorms",
+            "failure": "Fuel pump issue",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1626,11 +1626,11 @@
     {
         "lap_number": 127,
         "lap_data": {
-            "lap_time": 651.0,
-            "fuel_level": 20.2,
+            "lap_time": 550.0,
+            "fuel_level": 19.4,
             "tire_wear": 0.6499999999999997,
-            "failure": "Fuel pump issue",
-            "weather": "Thunderstorms",
+            "failure": "No failure",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1638,11 +1638,11 @@
     {
         "lap_number": 128,
         "lap_data": {
-            "lap_time": 577.5,
-            "fuel_level": 17.2,
+            "lap_time": 537.4999999999999,
+            "fuel_level": 16.599999999999998,
             "tire_wear": 0.5999999999999996,
-            "failure": "Cooling system",
-            "weather": "Heavy rain",
+            "failure": "No failure",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1650,11 +1650,11 @@
     {
         "lap_number": 129,
         "lap_data": {
-            "lap_time": 608.9999999999999,
-            "fuel_level": 13.7,
+            "lap_time": 524.9999999999999,
+            "fuel_level": 13.599999999999998,
             "tire_wear": 0.5499999999999996,
-            "failure": "Hydraulic leak",
-            "weather": "Heavy rain",
+            "failure": "Cooling system",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1662,32 +1662,31 @@
     {
         "lap_number": 130,
         "lap_data": {
-            "lap_time": 4608.099999999999,
+            "lap_time": 2521.2999999999997,
             "fuel_level": 35,
             "tire_wear": 1,
             "failure": "No failure",
-            "weather": "Heavy rain",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": {
                 "repairs": [
                     "Fuel pump issue",
-                    "Cooling system",
-                    "Hydraulic leak"
+                    "Cooling system"
                 ],
-                "fuel_amount": 24.8,
+                "fuel_amount": 24.400000000000002,
                 "tires_change": true,
-                "time in pitstop": 4009.6
+                "time in pitstop": 2008.8
             }
         }
     },
     {
         "lap_number": 131,
         "lap_data": {
-            "lap_time": 546.0,
+            "lap_time": 500,
             "fuel_level": 33,
             "tire_wear": 0.95,
             "failure": "No failure",
-            "weather": "Heavy rain",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1695,11 +1694,11 @@
     {
         "lap_number": 132,
         "lap_data": {
-            "lap_time": 598.5,
+            "lap_time": 487.5,
             "fuel_level": 31,
             "tire_wear": 0.8999999999999999,
             "failure": "No failure",
-            "weather": "Thunderstorms",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1707,11 +1706,11 @@
     {
         "lap_number": 133,
         "lap_data": {
-            "lap_time": 724.5,
-            "fuel_level": 27.8,
+            "lap_time": 475.0,
+            "fuel_level": 29,
             "tire_wear": 0.8499999999999999,
-            "failure": "Engine overheating",
-            "weather": "Heavy rain",
+            "failure": "No failure",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1719,11 +1718,11 @@
     {
         "lap_number": 134,
         "lap_data": {
-            "lap_time": 714.0,
-            "fuel_level": 24.6,
+            "lap_time": 462.5,
+            "fuel_level": 27,
             "tire_wear": 0.7999999999999998,
             "failure": "No failure",
-            "weather": "Heavy rain",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1731,11 +1730,11 @@
     {
         "lap_number": 135,
         "lap_data": {
-            "lap_time": 703.5,
-            "fuel_level": 21.400000000000002,
+            "lap_time": 449.99999999999994,
+            "fuel_level": 25,
             "tire_wear": 0.7499999999999998,
             "failure": "No failure",
-            "weather": "Heavy rain",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1743,11 +1742,11 @@
     {
         "lap_number": 136,
         "lap_data": {
-            "lap_time": 609.0,
-            "fuel_level": 18.200000000000003,
+            "lap_time": 537.5,
+            "fuel_level": 22.9,
             "tire_wear": 0.6999999999999997,
-            "failure": "No failure",
-            "weather": "Light rain",
+            "failure": "Brakes overheat",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1755,8 +1754,8 @@
     {
         "lap_number": 137,
         "lap_data": {
-            "lap_time": 556.5,
-            "fuel_level": 15.000000000000004,
+            "lap_time": 525.0,
+            "fuel_level": 20.799999999999997,
             "tire_wear": 0.6499999999999997,
             "failure": "No failure",
             "weather": "Sunny",
@@ -1767,8 +1766,8 @@
     {
         "lap_number": 138,
         "lap_data": {
-            "lap_time": 546.0,
-            "fuel_level": 11.800000000000004,
+            "lap_time": 512.4999999999999,
+            "fuel_level": 18.699999999999996,
             "tire_wear": 0.5999999999999996,
             "failure": "No failure",
             "weather": "Sunny",
@@ -1779,10 +1778,10 @@
     {
         "lap_number": 139,
         "lap_data": {
-            "lap_time": 535.4999999999999,
-            "fuel_level": 8.560000000000004,
+            "lap_time": 499.9999999999999,
+            "fuel_level": 16.599999999999994,
             "tire_wear": 0.5499999999999996,
-            "failure": "Tire puncture",
+            "failure": "No failure",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -1791,28 +1790,26 @@
     {
         "lap_number": 140,
         "lap_data": {
-            "lap_time": 4544.5599999999995,
+            "lap_time": 1188.5,
             "fuel_level": 35,
             "tire_wear": 1,
-            "failure": "Brakes overheat",
+            "failure": "No failure",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": {
                 "repairs": [
-                    "Engine overheating",
-                    "Tire puncture",
                     "Brakes overheat"
                 ],
-                "fuel_amount": 29.779999999999994,
+                "fuel_amount": 20.500000000000007,
                 "tires_change": true,
-                "time in pitstop": 4019.56
+                "time in pitstop": 701.0
             }
         }
     },
     {
         "lap_number": 141,
         "lap_data": {
-            "lap_time": 420.0,
+            "lap_time": 500.0,
             "fuel_level": 33,
             "tire_wear": 0.95,
             "failure": "No failure",
@@ -1824,7 +1821,7 @@
     {
         "lap_number": 142,
         "lap_data": {
-            "lap_time": 409.5,
+            "lap_time": 487.5,
             "fuel_level": 31,
             "tire_wear": 0.8999999999999999,
             "failure": "No failure",
@@ -1836,11 +1833,11 @@
     {
         "lap_number": 143,
         "lap_data": {
-            "lap_time": 399.0,
+            "lap_time": 475.0,
             "fuel_level": 29,
             "tire_wear": 0.8499999999999999,
             "failure": "No failure",
-            "weather": "Sunny",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1848,11 +1845,11 @@
     {
         "lap_number": 144,
         "lap_data": {
-            "lap_time": 535.5,
-            "fuel_level": 26.5,
+            "lap_time": 462.5,
+            "fuel_level": 27,
             "tire_wear": 0.7999999999999998,
-            "failure": "Hydraulic leak",
-            "weather": "Sunny",
+            "failure": "No failure",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1861,10 +1858,10 @@
         "lap_number": 145,
         "lap_data": {
             "lap_time": 525.0,
-            "fuel_level": 24.0,
+            "fuel_level": 24.7,
             "tire_wear": 0.7499999999999998,
-            "failure": "No failure",
-            "weather": "Sunny",
+            "failure": "Electronics malfunction",
+            "weather": "Cloudy",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1872,11 +1869,11 @@
     {
         "lap_number": 146,
         "lap_data": {
-            "lap_time": 514.5,
-            "fuel_level": 21.5,
+            "lap_time": 562.5,
+            "fuel_level": 22.4,
             "tire_wear": 0.6999999999999997,
             "failure": "No failure",
-            "weather": "Sunny",
+            "weather": "Light rain",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1884,11 +1881,11 @@
     {
         "lap_number": 147,
         "lap_data": {
-            "lap_time": 503.99999999999994,
-            "fuel_level": 18.8,
+            "lap_time": 550.0,
+            "fuel_level": 20.099999999999998,
             "tire_wear": 0.6499999999999997,
-            "failure": "Cooling system",
-            "weather": "Sunny",
+            "failure": "No failure",
+            "weather": "Light rain",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1896,8 +1893,8 @@
     {
         "lap_number": 148,
         "lap_data": {
-            "lap_time": 493.49999999999994,
-            "fuel_level": 16.1,
+            "lap_time": 487.4999999999999,
+            "fuel_level": 17.799999999999997,
             "tire_wear": 0.5999999999999996,
             "failure": "No failure",
             "weather": "Sunny",
@@ -1908,10 +1905,10 @@
     {
         "lap_number": 149,
         "lap_data": {
-            "lap_time": 482.99999999999994,
-            "fuel_level": 13.360000000000001,
+            "lap_time": 474.9999999999999,
+            "fuel_level": 15.499999999999996,
             "tire_wear": 0.5499999999999996,
-            "failure": "Tire puncture",
+            "failure": "No failure",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
@@ -1920,32 +1917,31 @@
     {
         "lap_number": 150,
         "lap_data": {
-            "lap_time": 3781.26,
+            "lap_time": 2966.5,
             "fuel_level": 35,
             "tire_wear": 1,
-            "failure": "No failure",
-            "weather": "Cloudy",
+            "failure": "Cooling system",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": {
                 "repairs": [
-                    "Hydraulic leak",
-                    "Cooling system",
-                    "Tire puncture"
+                    "Electronics malfunction",
+                    "Cooling system"
                 ],
-                "fuel_amount": 24.38,
+                "fuel_amount": 22.000000000000004,
                 "tires_change": true,
-                "time in pitstop": 3308.76
+                "time in pitstop": 2504.0
             }
         }
     },
     {
         "lap_number": 151,
         "lap_data": {
-            "lap_time": 420,
+            "lap_time": 500.0,
             "fuel_level": 33,
             "tire_wear": 0.95,
             "failure": "No failure",
-            "weather": "Cloudy",
+            "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"
         }
@@ -1953,293 +1949,10 @@
     {
         "lap_number": 152,
         "lap_data": {
-            "lap_time": 409.5,
-            "fuel_level": 31,
+            "lap_time": 725.0,
+            "fuel_level": 29.8,
             "tire_wear": 0.8999999999999999,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 153,
-        "lap_data": {
-            "lap_time": 399.0,
-            "fuel_level": 29,
-            "tire_wear": 0.8499999999999999,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 154,
-        "lap_data": {
-            "lap_time": 409.5,
-            "fuel_level": 26.96,
-            "tire_wear": 0.7999999999999998,
-            "failure": "Tire puncture",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 155,
-        "lap_data": {
-            "lap_time": 399.0,
-            "fuel_level": 24.92,
-            "tire_wear": 0.7499999999999998,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 156,
-        "lap_data": {
-            "lap_time": 388.49999999999994,
-            "fuel_level": 22.880000000000003,
-            "tire_wear": 0.6999999999999997,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 157,
-        "lap_data": {
-            "lap_time": 377.99999999999994,
-            "fuel_level": 20.800000000000004,
-            "tire_wear": 0.6499999999999997,
-            "failure": "Tire puncture",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 158,
-        "lap_data": {
-            "lap_time": 367.49999999999994,
-            "fuel_level": 18.720000000000006,
-            "tire_wear": 0.5999999999999996,
-            "failure": "No failure",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 159,
-        "lap_data": {
-            "lap_time": 356.99999999999994,
-            "fuel_level": 16.640000000000008,
-            "tire_wear": 0.5499999999999996,
-            "failure": "No failure",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 160,
-        "lap_data": {
-            "lap_time": 1347.46,
-            "fuel_level": 35,
-            "tire_wear": 1,
-            "failure": "Tire puncture",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": {
-                "repairs": [
-                    "Tire puncture",
-                    "Tire puncture",
-                    "Tire puncture"
-                ],
-                "fuel_amount": 20.47999999999999,
-                "tires_change": true,
-                "time in pitstop": 1000.96
-            }
-        }
-    },
-    {
-        "lap_number": 161,
-        "lap_data": {
-            "lap_time": 483.0,
-            "fuel_level": 32.7,
-            "tire_wear": 0.95,
-            "failure": "Electronics malfunction",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 162,
-        "lap_data": {
-            "lap_time": 598.5,
-            "fuel_level": 29.400000000000002,
-            "tire_wear": 0.8999999999999999,
-            "failure": "Gearbox failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 163,
-        "lap_data": {
-            "lap_time": 588.0,
-            "fuel_level": 26.1,
-            "tire_wear": 0.8499999999999999,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 164,
-        "lap_data": {
-            "lap_time": 577.5,
-            "fuel_level": 22.8,
-            "tire_wear": 0.7999999999999998,
-            "failure": "No failure",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 165,
-        "lap_data": {
-            "lap_time": 567.0,
-            "fuel_level": 19.5,
-            "tire_wear": 0.7499999999999998,
-            "failure": "No failure",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 166,
-        "lap_data": {
-            "lap_time": 556.5,
-            "fuel_level": 16.2,
-            "tire_wear": 0.6999999999999997,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 167,
-        "lap_data": {
-            "lap_time": 546.0,
-            "fuel_level": 12.899999999999999,
-            "tire_wear": 0.6499999999999997,
-            "failure": "No failure",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 168,
-        "lap_data": {
-            "lap_time": 535.5,
-            "fuel_level": 9.599999999999998,
-            "tire_wear": 0.5999999999999996,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 169,
-        "lap_data": {
-            "lap_time": 524.9999999999999,
-            "fuel_level": 6.259999999999998,
-            "tire_wear": 0.5499999999999996,
-            "failure": "Tire puncture",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 170,
-        "lap_data": {
-            "lap_time": 9051.56,
-            "fuel_level": 35,
-            "tire_wear": 1,
             "failure": "Engine overheating",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": {
-                "repairs": [
-                    "Electronics malfunction",
-                    "Gearbox failure",
-                    "Tire puncture",
-                    "Engine overheating"
-                ],
-                "fuel_amount": 33.28,
-                "tires_change": true,
-                "time in pitstop": 8526.56
-            }
-        }
-    },
-    {
-        "lap_number": 171,
-        "lap_data": {
-            "lap_time": 420.0,
-            "fuel_level": 33,
-            "tire_wear": 0.95,
-            "failure": "No failure",
-            "weather": "Sunny",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 172,
-        "lap_data": {
-            "lap_time": 409.5,
-            "fuel_level": 31,
-            "tire_wear": 0.8999999999999999,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 173,
-        "lap_data": {
-            "lap_time": 399.0,
-            "fuel_level": 29,
-            "tire_wear": 0.8499999999999999,
-            "failure": "No failure",
-            "weather": "Cloudy",
-            "tires": "soft",
-            "pitstop": "No"
-        }
-    },
-    {
-        "lap_number": 174,
-        "lap_data": {
-            "lap_time": 388.5,
-            "fuel_level": 27,
-            "tire_wear": 0.7999999999999998,
-            "failure": "No failure",
             "weather": "Sunny",
             "tires": "soft",
             "pitstop": "No"

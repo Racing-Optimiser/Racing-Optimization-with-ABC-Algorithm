@@ -207,7 +207,7 @@ def main():
         weight=1040,
         fuel_tank_capacity=35,
         average_fuel_consumption=2,
-        lap_time=210
+        lap_time=250
         )
     track = RaceTrack()
     tires_list_json = 'data/tires_characteristics.json'
@@ -238,6 +238,7 @@ def main():
     failure_list = 'data/failure_list.json'
     i = 1
     race_time = 0
+    first_circle = True
     while race_time < 86400:
     
 
@@ -252,8 +253,10 @@ def main():
 
         if lap_data_gen[1]:
             actuall_failures.append(lap_data_gen[1])
-        
-        final_lap_time = lap_time_with_actuall_conditions(actuall_failures,car.lap_time,tires,tires_wear,weather)
+        if first_circle:
+            final_lap_time = car.lap_time
+        else:
+            final_lap_time = lap_time_with_actuall_conditions(actuall_failures,car.lap_time,tires,tires_wear,weather)
         tires_wear = tires_wear - tires.degradation_rate
         
         
@@ -278,7 +281,7 @@ def main():
         final_lap_time += pitstop_time
         lap_data["lap_time"] = final_lap_time
         save_to_json_race('data/race_simulation1.json',i,lap_data)
-
+        first_circle = False
         i += 1
 
 main()
