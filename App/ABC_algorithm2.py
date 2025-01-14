@@ -250,15 +250,19 @@ def choose_random_failure(failures,part_wear):
 
 
 def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
+    
+    start_memory = monitor_memory()
+    start_time = time.perf_counter()
+  
     race_list = ['data/race_simulation.json','data/race_simulation1.json','data/race_simulation2.json']
     with open(race_list[race_idx], "r") as file:
         race_data = json.load(file)
      
     # Parametry algorytmu
     dim = 7  # Liczba wymiarów
-    num_bees = 15  # Liczba pszczół
-    max_iter = 15  # Maksymalna liczba iteracji
-    food_limit = 10  # Limit wyczerpania źródła pożywienia
+    # num_bees = 15  # Liczba pszczół
+    # max_iter = 15  # Maksymalna liczba iteracji
+    # food_limit = 10  # Limit wyczerpania źródła pożywienia
     best_strategies = []
     iter_show = []
     global_iter = []
@@ -421,14 +425,21 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
         global_iter.append(iter_show.copy())
         iter_show = []
         
-
+    stop_time = time.perf_counter()
+    end_memory = monitor_memory()
+    calculation_time = stop_time - start_time
+    calculation_memory = end_memory - start_memory
+    
+    print(f"Memory used: {calculation_memory:.2f} MB")
+    print(f"Execution time: {calculation_time}")
+    
     # Wizualizacja wyników (opcjonalnie)
     # visualize_optimization(population, calculate_total_time, lb, ub, best_solutions)
     vis_global(global_iter)
     for i, value in enumerate(best_strategies, start=1):  
         print(f"Strategia {i}: {value}")
     print(best_solutions)
-    return best_solutions, best_strategies
+    return best_solutions, best_strategies, calculation_memory, calculation_time
 
 
 def pitstop(car, tires,tires_wear,fuel_level, actuall_failures,fix_engine,fix_suspension, fix_brakes,tire_change,fuel ,parts_wear,tires_order,tires_strategy):
@@ -634,7 +645,9 @@ def vis_global(data):
     y_min = min(flat_data) - 1
     y_max = max(flat_data) + 1
     plt.yticks(range(int(y_min), int(y_max) + 10000, 10000))
-    plt.title(f"Full")
+    plt.title(f"Funkcja celu")
+    plt.xlabel("Kolejne iteracje")
+    plt.ylabel("Czas przy obranej strategii")
     plt.show()
 
 def vis_iter(data,i):

@@ -23,9 +23,9 @@ class Racing:
 
 
     def run_algorithm(self, parameters, race_idx):
-        best_solutions, best_strategies = abc_algorithm_demo(parameters[0], parameters[1], parameters[2], race_idx)
+        best_solutions, best_strategies, calculation_memory, calculation_time = abc_algorithm_demo(parameters[0], parameters[1], parameters[2], race_idx)
         self.algorithm_done = True
-        self.result = best_solutions, best_strategies
+        self.result = best_solutions, best_strategies, calculation_memory, calculation_time
 
     def run(self, parameters, race_idx):
         

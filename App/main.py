@@ -12,7 +12,7 @@ screen = pygame.display.set_mode(screen_size)
 clock = pygame.time.Clock()
 parameters = []
 
-MENU, MAP_CREATOR, SIMULATION, RACING, RESULT_SCREEN= 'MENU', 'MAP_CREATOR', 'SIMULATION', 'RACING', 'RESULT_SCREEN'
+MENU, MAP_CREATOR, SIMULATION, RACING, RESULT_SCREEN = 'MENU', 'MAP_CREATOR', 'SIMULATION', 'RACING', 'RESULT_SCREEN'
 
 # Initial game state
 current_state = MENU

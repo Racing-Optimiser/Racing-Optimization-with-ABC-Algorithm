@@ -8,9 +8,9 @@ class Menu:
         self.title_font = pygame.font.SysFont("Papyrus", 80)  # Larger font for the title
         self.background_image = pygame.image.load("data/background.jpg")  
         self.buttons = {
-            'Map Creator': pygame.Rect(150, 200, 500, 50),
-            'Run Simulation': pygame.Rect(150, 300, 500, 50),
-            'Quit': pygame.Rect(150, 400, 500, 50)
+            'Kreator mapy': pygame.Rect(150, 200, 500, 50),
+            'Symulacja': pygame.Rect(150, 300, 500, 50),
+            'Wyjdź': pygame.Rect(150, 400, 500, 50)
         }
 
     def draw_title(self):
@@ -44,11 +44,11 @@ class Menu:
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     for text, rect in self.buttons.items():
                         if rect.collidepoint(mouse_pos):
-                            if text == 'Map Creator':
+                            if text == 'Kreator mapy':
                                 return 'MAP_CREATOR'
-                            elif text == 'Run Simulation':
+                            elif text == 'Symulacja':
                                 return 'SIMULATION'
-                            elif text == 'Quit':
+                            elif text == 'Wyjdź':
                                 pygame.quit()
                                 sys.exit()
 
