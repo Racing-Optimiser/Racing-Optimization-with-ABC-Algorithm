@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
+import csv
 matplotlib.use('TkAgg')
 import random
 import json
@@ -256,9 +257,9 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
      
     # Parametry algorytmu
     dim = 7  # Liczba wymiarów
-    num_bees = 15  # Liczba pszczół
-    max_iter = 15  # Maksymalna liczba iteracji
-    food_limit = 10  # Limit wyczerpania źródła pożywienia
+    # num_bees = 15  # Liczba pszczół
+    # max_iter = 15  # Maksymalna liczba iteracji
+    # food_limit = 10  # Limit wyczerpania źródła pożywienia
     best_strategies = []
     iter_show = []
     global_iter = []
@@ -424,7 +425,8 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
 
     # Wizualizacja wyników (opcjonalnie)
     # visualize_optimization(population, calculate_total_time, lb, ub, best_solutions)
-    vis_global(global_iter)
+    # vis_global(global_iter)
+    del global_iter 
     for i, value in enumerate(best_strategies, start=1):  
         print(f"Strategia {i}: {value}")
     print(best_solutions)
@@ -658,8 +660,47 @@ def vis_iter(data,i):
 def monitor_memory():
     process = psutil.Process(os.getpid())
     mem_info = process.memory_info()
-    return mem_info.rss / (1024 ** 2)  # Zwraca pamięć w MB
+    return mem_info.rss / (1024)  # Zwraca pamięć w MB
+
+
+def save_results_to_csv(data, filename="Results/40iter10bees10foodx50.csv"):
+   
+    
+    transposed_data = list(zip(*data))
+    
+  
+    headers = [f"Test {i+1}" for i in range(len(transposed_data[0]))]
+    
+   
+    with open(filename, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(headers)  
+        writer.writerows(transposed_data)  
+
+    
 # Uruchomienie algorytmu
+# if __name__ == "__main__":
+#     tested_solutions = []
+#     avg_memory = 0
+#     avg_time = 0
+#     start_time_testing = time.perf_counter()
+#     # for i in range(50):
+#     #     start_memory = monitor_memory()
+#     #     start_time = time.perf_counter()
+#     #     best_solutions, best_strategies = abc_algorithm_demo(40, 10, 10, 1) # Maksymalna liczba iteracji # Liczba pszczół  # Limit wyczerpania źródła pożywienia
+#     #     stop_time = time.perf_counter()
+#     #     end_memory = monitor_memory()
+
+#     #     tested_solutions.append(best_solutions)
+#     #     avg_memory += end_memory - start_memory
+#     #     avg_time += stop_time - start_time
+#     # stop_time_testing = time.perf_counter()
+#     # save_results_to_csv(tested_solutions)
+
+
+#     # print(f"Memory used: {avg_memory/50:.2f} KB")
+#     # print(f"Execution time: {avg_time/50}")
+#     # print(f"Execution time all: {stop_time_testing - start_time_testing}")
 if __name__ == "__main__":
     start_memory = monitor_memory()
     start_time = time.perf_counter()
