@@ -43,3 +43,7 @@ if __name__ == "__main__":
         avg_time += stop_time - start_time
     stop_time_testing = time.perf_counter()
     save_results_to_csv(tested_solutions)
+
+    print(f"Memory used: {avg_memory/50:.2f} KB")
+    print(f"Execution time: {avg_time/50}")
+    print(f"Execution time all: {stop_time_testing - start_time_testing}")
