@@ -676,19 +676,19 @@ def monitor_memory():
     return mem_info.rss / (1024)  # Zwraca pamięć w MB
 
 
-def save_results_to_csv(data, filename="Results/40iter10bees10foodx50.csv"):
+# def save_results_to_csv(data, filename="Results/40iter10bees10foodx50.csv"):
    
     
-    transposed_data = list(zip(*data))
+#     transposed_data = list(zip(*data))
     
   
-    headers = [f"Test {i+1}" for i in range(len(transposed_data[0]))]
+#     headers = [f"Test {i+1}" for i in range(len(transposed_data[0]))]
     
    
-    with open(filename, mode='w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(headers)  
-        writer.writerows(transposed_data)  
+#     with open(filename, mode='w', newline='') as file:
+#         writer = csv.writer(file)
+#         writer.writerow(headers)  
+#         writer.writerows(transposed_data)  
 
     
 # Uruchomienie algorytmu

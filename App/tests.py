@@ -10,7 +10,7 @@ def monitor_memory():
     return mem_info.rss / (1024)  # Zwraca pamięć w MB
 
 
-def save_results_to_csv(data, filename="Results/5iter5bees5foodx2.csv"):
+def save_results_to_csv(data, filename="Results/10iter50bees10foodx50.csv"):
    
     
     transposed_data = list(zip(*data))
@@ -31,10 +31,10 @@ if __name__ == "__main__":
     avg_memory = 0
     avg_time = 0
     start_time_testing = time.perf_counter()
-    for i in range(2):
+    for i in range(50):
         start_memory = monitor_memory()
         start_time = time.perf_counter()
-        best_solutions, best_strategies = abc_algorithm_demo(5, 5, 5, 1) # Maksymalna liczba iteracji # Liczba pszczół  # Limit wyczerpania źródła pożywienia
+        best_solutions, best_strategies, clct, clcm = abc_algorithm_demo(10, 50, 10, 1) # Maksymalna liczba iteracji # Liczba pszczół  # Limit wyczerpania źródła pożywienia
         stop_time = time.perf_counter()
         end_memory = monitor_memory()
 
