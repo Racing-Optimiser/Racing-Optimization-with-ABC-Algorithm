@@ -436,7 +436,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
     
     # Wizualizacja wyników (opcjonalnie)
     # visualize_optimization(population, calculate_total_time, lb, ub, best_solutions)
-    # vis_global(global_iter)
+    vis_global(global_iter)
     del global_iter 
     for i, value in enumerate(best_strategies, start=1):  
         print(f"Strategia {i}: {value}")
@@ -717,7 +717,7 @@ def monitor_memory():
 if __name__ == "__main__":
     start_memory = monitor_memory()
     start_time = time.perf_counter()
-    abc_algorithm_demo(50, 10, 50, 1)
+    abc_algorithm_demo(40, 10, 50, 1)
     stop_time = time.perf_counter()
     end_memory = monitor_memory()
 

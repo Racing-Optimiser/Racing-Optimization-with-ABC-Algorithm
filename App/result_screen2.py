@@ -38,7 +38,7 @@ class Result_Screen:
             screen.blit(time_text, time_text_rect)
 
             pygame.draw.rect(screen, 'blue', self.memory_field, border_radius=12)
-            memory_text = font.render(f"Pamięć:{round(results[3], 3)} MB", True, (255, 255, 255))
+            memory_text = font.render(f"Pamięć:{round(results[3], 3)} KB", True, (255, 255, 255))
             memory_text_rect = memory_text.get_rect(center=self.memory_field.center)
             screen.blit(memory_text, memory_text_rect)
 
