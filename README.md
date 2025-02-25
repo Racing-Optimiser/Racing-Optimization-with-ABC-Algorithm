@@ -21,7 +21,7 @@ This project implements a simulation to optimize race strategies using the Artif
   - Provides visual feedback on optimization progress and results.
 - **Multiprocess testing**:
   - Better CPU utilization through parallel processing. Reduced time for tests.
-    | **Parameters (Number of tests, Iterations, Bees, Food)** | **Previous Time (Single-threaded)** | **New Time (Multiprocessing)** |
+    | **Parameters (Number of tests, Iterations, Bees, Food)** | **Previous Time (Single process)** | **New Time (Multiprocessing)** |
     |-----------------------------------------|-------------------------------------|--------------------------------|
     | `50, 30, 30, 30`                            | 🕰️ 55 minutes 50 seconds                       | ⚡ 26 minutes 48 seconds                   |
     
