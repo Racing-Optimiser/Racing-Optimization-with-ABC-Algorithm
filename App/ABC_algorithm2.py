@@ -8,6 +8,7 @@ import json
 import psutil
 import os
 import time
+import threading
 from car_failure import CarFailure
 from race_car import RaceCar
 from weather_class import Weather
@@ -16,6 +17,8 @@ from brakes_failure_class import BrakesFailure
 from engine_failure_class import EngineFailure
 from suspension_failure_class import SuspensionFailure
 from tires_failure_class import TiresFailure
+from thread import Thread
+from queue import Queue
 
 #pobranie możliwych usterek dla danego podzespołu i w jakim momencie zużycia jest ryzyko ich wystąpienia
 failures_engine = EngineFailure.load_from_file()
@@ -34,6 +37,11 @@ failure_list = './data/failure_list.json'
 weather_list = 'data/weather_conditions.json'
 tire_list = 'data/tires_characteristics.json'
 
+
+
+
+
+
 car = RaceCar(
         make="Toyota",
         model="GR010 Hybrid",
@@ -41,7 +49,7 @@ car = RaceCar(
         horsepower=680,
         weight=1040,
         fuel_tank_capacity=35,
-        average_fuel_consumption=3, #power*avg_fuel_consumption
+        average_fuel_consumption=3, #power*avg_fuel_consumption``
         lap_time=350
         )
 
@@ -49,7 +57,7 @@ car = RaceCar(
 #     race_data = json.load(file)
  
  # Funkcja celu
-def calculate_total_time(race_data, strategy):
+def calculate_total_time(race_data, strategy,queue=None):
     total_time = 0
     #pobranie strategii
     brakes_wear_strat = strategy[0]
@@ -167,6 +175,9 @@ def calculate_total_time(race_data, strategy):
 
     #fajnie by było tu wyświetlać która to była kalkulacja
     # print("Calculation nr: ")
+    if queue:
+        queue.put(total_time)
+
     return total_time
 
 
@@ -250,7 +261,23 @@ def choose_random_failure(failures,part_wear):
     return chosen_failure
 
 
-def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
+def multi_thread_handle(race_data,population):
+    queue = Queue()
+    threads = []
+    res = []
+    for strategy in population:
+        thread = Thread(target=calculate_total_time,args=(race_data,strategy,queue))
+        threads.append(thread)
+        thread.start()
+    
+    for thread in threads:
+        thread.join()
+
+    while not queue.empty():
+        res.append(queue.get())
+    return res
+
+def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx,queue_tests = None):
     
     start_memory = monitor_memory()
     start_time = time.perf_counter()
@@ -294,6 +321,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
         for _ in range(num_bees)
     ]
 
+    # fitness = multi_thread_handle(race_data,population)
     fitness = [calculate_total_time(race_data, strategy) for strategy in population]
     print(fitness)
     # iter_show.append(fitness)
@@ -314,6 +342,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
     for _ in range(max_iter):
         iter_nb += 1
         # Faza pszczół robotnic
+        candidates = []
         for i in range(num_bees):
             partner = random.randint(0, num_bees - 1)
             phi = np.random.uniform(-1, 1)
@@ -343,6 +372,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][-1]))  # Klipowanie
                     candidate_value = round(candidate_value ,2)
                     candidate.append(candidate_value)
+            
             candidate_fitness = calculate_total_time(race_data, candidate)
             iter_show.append(candidate_fitness)
             if candidate_fitness < fitness[i]:
@@ -352,6 +382,27 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
             else:
                 trial_counter[i] += 1
 
+            # candidates.append(candidate)
+        
+        # candidate_fitness = multi_thread_handle(race_data,candidates)
+        # candidate_fitness = calculate_total_time(race_data, candidate)
+        
+            
+        # iter_show.append(candidate_fitness)
+        # i = 0
+        # for candidate_fit in candidate_fitness:
+        #     iter_show.append(candidate_fit)
+        #     if candidate_fit < fitness[i]:
+        #         population[i] = candidates[i]
+        #         fitness[i] = candidate_fit
+        #         trial_counter[i] = 0
+        #     else:
+        #         trial_counter[i] += 1
+            
+        #     i += 1
+
+            
+
         # Faza pszczół obserwatorów
         prob = fitness / np.sum(fitness)
         for i in range(num_bees):
@@ -359,6 +410,7 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
             partner = random.randint(0, num_bees - 1)
             phi = np.random.uniform(-1, 1)
             candidate = []
+            candidates = []
             for j in range(dim):
                 if j == 3:  # Strategia opon (string)
                     #Zmiana całej listy
@@ -383,15 +435,43 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
                     candidate_value = population[selected][j] + phi * (population[selected][j] - population[partner][j])
                     candidate_value = max(bounds[j][0], min(candidate_value, bounds[j][-1]))
                     candidate.append(candidate_value)
+                
             candidate_fitness = calculate_total_time(race_data, candidate)
             iter_show.append(candidate_fitness)
-
-            if candidate_fitness < fitness[selected]:
-                population[selected] = candidate
-                fitness[selected] = candidate_fitness
-                trial_counter[selected] = 0
+            if candidate_fitness < fitness[i]:
+                population[i] = candidate
+                fitness[i] = candidate_fitness
+                trial_counter[i] = 0
             else:
-                trial_counter[selected] += 1
+                trial_counter[i] += 1
+
+                # candidates.append(candidate)
+        
+        # candidate_fitness = multi_thread_handle(race_data,candidates)
+        # candidate_fitness = calculate_total_time(race_data, candidate)
+        
+            
+        # iter_show.append(candidate_fitness)
+        # i = 0
+        # for candidate_fit in candidate_fitness:
+        #     iter_show.append(candidate_fit)
+        #     if candidate_fit < fitness[i]:
+        #         population[i] = candidates[i]
+        #         fitness[i] = candidate_fit
+        #         trial_counter[i] = 0
+        #     else:
+        #         trial_counter[i] += 1
+            
+            i += 1
+            # candidate_fitness = calculate_total_time(race_data, candidate)
+            # iter_show.append(candidate_fitness)
+
+            # if candidate_fitness < fitness[selected]:
+            #     population[selected] = candidate
+            #     fitness[selected] = candidate_fitness
+            #     trial_counter[selected] = 0
+            # else:
+            #     trial_counter[selected] += 1
 
         # Faza pszczół zwiadowców
         for i in range(num_bees):
@@ -436,11 +516,14 @@ def abc_algorithm_demo(max_iter, num_bees, food_limit,race_idx):
     
     # Wizualizacja wyników (opcjonalnie)
     # visualize_optimization(population, calculate_total_time, lb, ub, best_solutions)
-    vis_global(global_iter)
+    # vis_global(global_iter)
     del global_iter 
     for i, value in enumerate(best_strategies, start=1):  
         print(f"Strategia {i}: {value}")
     print(best_solutions)
+    if queue_tests:
+        queue_tests.put([best_solutions, best_strategies, calculation_memory, calculation_time])
+
     return best_solutions, best_strategies, calculation_memory, calculation_time
 
 
